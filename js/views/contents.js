@@ -36,21 +36,27 @@ define([
 
       tagName: 'ul',
 
-      events: {
-        'click': function () {
-          // todo: fetch next page
-        }
+      initialize: function () {
+
+        this.ev.on('pagination:next', function () {
+          new ContentsView({collection: IssuesCollection.getNextPage()}).render();
+          console.log('fetching new page');
+        });
+
       },
 
       render: function () {
+
         $('#contents section').html(this.el);
         (this.collection.models).forEach(function (document) {
           this.$el.append(new DocumentListView({model: document}).render().el);
         }, this);
+
+        return this;
       }
+
     });
 
-    return this;
   };
 
   return {

@@ -38,11 +38,8 @@ define([
         // "Choose the issue"
       },
 
-      viewDocument: function (title) {
-        var selectedDocument = (documents).find(function (document) {
-          return document.get('title') === title;
-        });
-        new IssueView({model: selectedDocument}).render().el;
+      viewDocument: function (number) {
+        new IssueView({model: {'number': number}});
       },
 
       leaveFeedback: function() {
@@ -58,8 +55,8 @@ define([
     var router = new DocumentRouter();
     Backbone.history.start();
 
-    EventManager.on('document:selected', function(document) {
-      var urlPath = 'view/' + document.get('title');
+    EventManager.on('document:selected', function(issue) {
+      var urlPath = 'view/' + issue.get('number');
       router.navigate(urlPath, {trigger: true});
     });
 
