@@ -10,7 +10,7 @@ define([
   var ContentsView = BaseView.extend({
     tagName: 'ul',
     render: function () {
-      _(this.collection).each(function (document) {
+      (this.collection).forEach(function (document) {
         this.$el.append(new DocumentListView({model: document}).render().el);
       }, this);
 

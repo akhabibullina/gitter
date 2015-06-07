@@ -45,7 +45,7 @@ define([
       },
 
       viewDocument: function (title) {
-        var selectedDocument = _(documents.models).find(function (document) {
+        var selectedDocument = (documents).find(function (document) {
           return document.get('title') === title;
         });
         new IssueView({model: selectedDocument}).render().el;

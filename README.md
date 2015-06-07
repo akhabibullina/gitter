@@ -7,7 +7,7 @@ Gitter is a simple new issues viewer for Github build on BackboneJs.
 
 ### How to run Gitter
 1. Unzip the folder
-2. Start the webserver such as Apache
+2. Start the webserver such as Apache to serve the app
 3. Open the file ``` path/to/project/gitter/index.html``` in the browser
 4. You are there, enjoy!
 
