@@ -12,28 +12,28 @@ require.config({
     template: '../templates'
   },
   shim: {
-    'theme/skel': {
-      "deps": ["jquery"],
-      "exports": "Skel"
-    },
-    'theme/skel-viewport': {
-      "deps": ["jquery"],
-      "exports": "Skel-viewport"
-    },
-    'theme/util': {
-      "deps": ["jquery"],
-      "exports": 'Util'
-    },
-    'theme/main': {
-      "deps": ["jquery", 'theme/skel', ],
-      "exports": "Skel"
-    },
+//    'theme/skel': {
+//      "deps": ["jquery"],
+//      "exports": "Skel"
+//    },
+//    'theme/skel-viewport': {
+//      "deps": ["jquery"],
+//      "exports": "Skel-viewport"
+//    },
+//    'theme/util': {
+//      "deps": ["jquery"],
+//      "exports": 'Util'
+//    },
+//    'theme/main': {
+//      "deps": ["jquery", 'theme/skel', ],
+//      "exports": "Skel"
+//    },
   }
 });
 
 require([
   // Load our app module and pass it to our definition function
-  'app',
+  'app'
 ], function(App){
   // The "app" dependency is passed in as "App"
   App.initialize();
