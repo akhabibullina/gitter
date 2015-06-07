@@ -4,8 +4,9 @@ define([
   'underscore',
   'backbone',
   'views/base',
-  'views/document-list'
-], function($, _, Backbone, BaseView, DocumentListView){
+  'views/navigation-menu',
+  'views/issue-list-item'
+], function($, _, Backbone, BaseView, NavigationMenu, DocumentListView){
   var ContentsView = BaseView.extend({
     tagName: 'ul',
     render: function () {

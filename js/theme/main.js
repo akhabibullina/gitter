@@ -101,16 +101,6 @@
 							// Lock.
 								isLocked = true;
 
-							// Change nav link (if it exists).
-								$nav_links.removeClass('active');
-								$nav_links.filter('[href="#' + id + '"]').addClass('active');
-
-							// Change hash.
-								if (i == 0)
-									window.location.hash = '#';
-								else
-									window.location.hash = '#' + id;
-
 							// Add bottom padding.
 								var x = parseInt($wrapper.css('padding-top')) +
 										panels[id].outerHeight() +

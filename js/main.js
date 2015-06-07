@@ -7,8 +7,27 @@ require.config({
   paths: {
     jquery: '//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min',
     underscore: 'lib/underscore',
+    backbone: 'lib/backbone',
     json2: 'json2',
-    backbone: 'lib/backbone'
+    template: '../templates'
+  },
+  shim: {
+    'theme/skel': {
+      "deps": ["jquery"],
+      "exports": "Skel"
+    },
+    'theme/skel-viewport': {
+      "deps": ["jquery"],
+      "exports": "Skel-viewport"
+    },
+    'theme/util': {
+      "deps": ["jquery"],
+      "exports": 'Util'
+    },
+    'theme/main': {
+      "deps": ["jquery", 'theme/skel', ],
+      "exports": "Skel"
+    },
   }
 });
 
