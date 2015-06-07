@@ -48,7 +48,7 @@ Gitter currently has the following structure
 ```
 * Models
 ```
-issue.js:
+issue-details.js:
     defaults: {
       number: 0,
       title: 'Untitled',
@@ -69,7 +69,7 @@ issues-pageable.js
 ```
 base.js
 contents.js
-issue.js
+issue-details.js
 issue-list-item.js
 navigation-menu.js
 ```

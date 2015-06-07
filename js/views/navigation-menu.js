@@ -21,7 +21,6 @@ define([
         $(e.target).addClass('active');
 
         this.ev.trigger('menu:changed', $(e.target).attr('href'));
-
       }
     });
 

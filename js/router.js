@@ -15,7 +15,7 @@ define([
   'backbone',
   'event-manager',
   'views/contents',
-  'views/issue'
+  'views/issue-details'
 ], function($, _, Backbone, EventManager, ContentsView, IssueView){
 
   var initialize = function() {
@@ -35,7 +35,7 @@ define([
       },
 
       viewEmptyDocument: function() {
-        // "Choose the issue"
+        $('#default-message').show();
       },
 
       viewDocument: function (number) {

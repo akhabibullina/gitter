@@ -65,8 +65,8 @@
 					$body._resize = function() {
 						var factor = ($window.width() * $window.height()) / (1440 * 900);
 						$body.css('font-size', Math.min(Math.max(Math.floor(factor * settings.sizeFactor), settings.sizeMin), settings.sizeMax) + 'pt');
-						$main.height(panels[activePanelId].outerHeight());
-						$body._reposition();
+						$main.height(panels[$('.active').attr('href').substr(1).split('/')[0]].outerHeight());
+//						$body._reposition();
 					};
 
 					$body._reposition = function() {
@@ -150,6 +150,7 @@
 
 				// Nav + Jumplinks.
 					$nav_links.add($jumplinks).click(function(e) {
+                      console.log(1);
 						var t = $(this), href = t.attr('href'), id;
 
 						if (href.substring(0,1) == '#') {

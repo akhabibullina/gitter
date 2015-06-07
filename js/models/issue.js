@@ -6,8 +6,11 @@ define([
 ], function(_, Backbone){
 
   var IssueModel = Backbone.Model.extend({
-    initialize: function(attributes, options) {
+    initialize: function(attributes) {
       this.number = attributes.number;
+    },
+    url: function(){
+      return 'https://api.github.com/repos/rails/rails/issues/' + this.number;
     },
     defaults: {
       number: 0,
@@ -19,9 +22,8 @@ define([
       summary: 'To Be Continued',
       teaser: 'Something 140char',
       comments: {}
-    },
-   'url': 'https://api.github.com/repos/rails/rails/issues/20469' + this.number
-  });
+    }
+  })
 
   // Return the model for the module
   return IssueModel;

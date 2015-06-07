@@ -19,7 +19,8 @@ define([
       state: {
         firstPage: 0,
         currentPage: 0,
-        pageSize: 25
+        // todo: revert to 25
+        pageSize: 5
       }
     });
 
@@ -51,6 +52,9 @@ define([
         (this.collection.models).forEach(function (document) {
           this.$el.append(new DocumentListView({model: document}).render().el);
         }, this);
+
+
+        ContentsView.__super__.render.apply(this, arguments);
 
         return this;
       }

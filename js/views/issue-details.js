@@ -15,14 +15,20 @@ define([
     el: $('#view section'),
 
     initialize: function() {
-      var that = this;
-      new IssueModel({number: this.model.number})
-        .fetch()
-        .success(function(data) {
-            that.model = data;
-            that.render();
-      });
 
+     var that = this;
+
+     var a = new IssueModel({number: this.model.number});
+        a.fetch({
+         success: function (data) {
+           that.model = data.attributes;
+           that.render();
+         },
+         error: function(e) {
+           console.log('Unable to get the info for selected item.' + e);
+           // todo: show 'wrong id' message
+         }
+       });
     },
 
     render: function () {
@@ -34,7 +40,11 @@ define([
       // Append our compiled template to this Views "el"
       this.$el.append(compiledTemplate);
 
+      $('#default-message').hide();
       $('#view').show();
+
+
+      IssueView.__super__.render.apply(this, arguments);
 
       return this;
     }

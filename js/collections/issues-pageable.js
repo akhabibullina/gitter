@@ -1,3 +1,4 @@
+//todo: escape to prevent js attack
 define([
   'underscore',
   'backbone',
@@ -16,11 +17,5 @@ define([
 //    ev.trigger('itemList:reset');
   }});
 
-  // You don't usually return a collection instantiated
   return IssuesPageableCollection;
 });
-
-
-//Boostrapping the data as suggested at Backbone docs:
-//http://documentcloud.github.io/backbone/#FAQ-bootstrap
-//todo: escape to prevent js attack

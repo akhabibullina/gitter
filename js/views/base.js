@@ -5,5 +5,13 @@ define([
   'backbone',
   'event-manager'
 ], function($, _, Backbone, EventManager){
-  return Backbone.View.extend({ev: EventManager});
+  // Share Event object for pub-sub communication across models and views
+  return Backbone.View.extend({
+
+    ev: EventManager,
+
+    render: function() {
+      window.dispatchEvent(new Event('resize'));
+      window.scroll(0, 0);
+    }});
 });
