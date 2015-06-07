@@ -25,6 +25,7 @@ Gitter uses a number of open source projects to work properly:
 * [Backbone.LocalStorage] - Backbone plugin that uses browser's LocalStorage for persistence
 * [RequireJs] - a JavaScript file and module loader
 * [Text!] - Require.js plugin that allows to load raw text as a dependency file
+* [Issues API]
 * [log4javascript] - a JavaScript logging framework based on the Java logging framework log4j
 * [qUnit] - A JavaScript Unit Testing framework
 * [node.js] - evented I/O for the backend
@@ -38,6 +39,7 @@ Gitter currently has the following structure
 #contents      // Show the list of issues on Default Page
 #view/:issue   // Show detailed issue information on Issue Details Page
 #feedback      // Show Feedback form
+*              // Fallback to default behavior
 ```
 * Events
 ```
@@ -61,7 +63,7 @@ issue.js:
 ```
 * Collections - set of issue models
 ```
-issues.js
+issues-pageable.js
 ```
 * Views
 ```
@@ -100,6 +102,7 @@ MIT
 [Backbone.LocalStorage]: https://github.com/jeromegn/Backbone.localStorage
 [RequireJs]: http://requirejs.org/
 [Text!]: https://github.com/requirejs/text
+[Issues API]: https://developer.github.com/v3/issues/
 [log4javascript]: http://log4javascript.org/docs/index.html
 [qUnit]: http://qunitjs.com/
 [node.js]:http://nodejs.org

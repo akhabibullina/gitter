@@ -15,16 +15,10 @@ define([
   'backbone',
   'event-manager',
   'views/contents',
-  'views/issue',
-  'collections/issues'
-], function($, _, Backbone, EventManager, ContentsView, IssueView, IssuesCollection){
+  'views/issue'
+], function($, _, Backbone, EventManager, ContentsView, IssueView){
 
-  var initialize = function(){
-
-    var documents = new IssuesCollection();
-    documents.add({ title: "Ginger Kid"});
-    documents.add({ title: "JavaScript Modules", content: 'why do we need modules? Organising JavaScript into modules makes it easier to reason about programs and makes it possible to test.'});
-    documents.add({ title: "Module Systems",content: 'There are three competing module systems at the moment: CommonJS, AMD and ECMAscript Harmony modules'});
+  var initialize = function() {
 
     var DocumentRouter = Backbone.Router.extend({
       routes: {
@@ -37,7 +31,7 @@ define([
       },
 
       contents: function () {
-        $('#contents section').html(new ContentsView({collection: documents.models}).render().el);
+        ContentsView.initialize();
       },
 
       viewEmptyDocument: function() {

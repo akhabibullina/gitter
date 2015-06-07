@@ -11,8 +11,8 @@ define([
     // Pass in our Router module and call it's initialize function
     Router.initialize();
     NavMenuView.initialize();
-    var log = log4javascript.getDefaultLogger();
-    log4javascript.info("Hello world");
+//    var log = log4javascript.getDefaultLogger();
+//    log4javascript.info("Hello world");
   }
 
   return {

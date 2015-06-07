@@ -1,119 +1,123 @@
 <!DOCTYPE HTML>
-        <!--todo:
-        1. replace tabs with whitespaces
-        2. check markup, maybe take the list of of the header
-        3. improve styles
-        3. load all theme's js files via requirejs
-        4. remove panel logic from main.js -- should be in router.js
-        5. cghange hash on menu items click using router
-        -->
+<!--todo:
+1. replace tabs with whitespaces
+2. check markup, maybe take the list of of the header
+3. improve styles
+3. load all theme's js files via requirejs
+4. remove panel logic from main.js -- should be in router.js
+5. cghange hash on menu items click using router
+-->
 <html>
-	<head>
-		<title>Gitter</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]>
-        <script src="js/theme/ie/html5shiv.js"></script><![endif]-->
+<head>
+    <title>Gitter</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!--[if lte IE 8]>
+    <script src="js/theme/ie/html5shiv.js"></script><![endif]-->
 
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-	</head>
-	<body>
+    <link rel="stylesheet" href="assets/css/main.css"/>
+    <noscript>
+        <link rel="stylesheet" href="assets/css/noscript.css"/>
+    </noscript>
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="assets/css/ie8.css"/><![endif]-->
+</head>
+<body>
 
-		<!-- Wrapper-->
-			<div id="wrapper">
+<!-- Wrapper-->
+<div id="wrapper">
 
-				<!-- Nav -->
-					<nav id="nav">
-						<a href="#contents" class="icon fa-home active"><span>Contents</span></a>
-						<a href="#view" class="icon fa-folder"><span>Details</span></a>
-						<a href="#feedback" class="icon fa-envelope"><span>Feedback</span></a>
-					</nav>
+    <!-- Nav -->
+    <nav id="nav">
+        <a href="#contents" class="icon fa-home active"><span>Contents</span></a>
+        <a href="#view" class="icon fa-folder"><span>Details</span></a>
+        <a href="#feedback" class="icon fa-envelope"><span>Feedback</span></a>
+    </nav>
 
-				<!-- Main -->
-					<div id="main">
+    <!-- Main -->
+    <div id="main">
 
-						<!-- Contents -->
-							<article id="contents" class="panel">
-                                <section>
+        <!-- Contents -->
+        <article id="contents" class="panel">
+            <section>
 
-                                </section>
-								<!--<header>-->
-									<!--<h1>Jane Doe</h1>-->
-									<!--<p>Senior Projectionist</p>-->
-								<!--</header>-->
-								<a href="#work" class="jumplink pic">
-									<span class="arrow icon fa-chevron-right"><span>See my work</span></span>
-									<img src="images/me.jpg" alt="" />
-								</a>
-							</article>
+            </section>
+            <!--<header>-->
+            <!--<h1>Jane Doe</h1>-->
+            <!--<p>Senior Projectionist</p>-->
+            <!--</header>-->
+            <a href="#work" class="jumplink pic">
+                <span class="arrow icon fa-chevron-right"><span>See my work</span></span>
+                <img src="images/me.jpg" alt=""/>
+            </a>
+        </article>
 
-						<!-- Work -->
-							<article id="view" class="panel">
-								<header>
-									<h2>Issue Details</h2>
-								</header>
-								<section>
-									<div class="row">
-										<div class="4u 12u$(mobile)">
-											<a href="#" class="image fit"><img src="images/pic01.jpg" alt=""></a>
-										</div>
-									</div>
-								</section>
-							</article>
+        <!-- Work -->
+        <article id="view" class="panel">
+            <header>
+                <h2>Issue Details</h2>
+            </header>
+            <section>
+                <div class="row">
+                    <div class="4u 12u$(mobile)">
+                        <a href="#" class="image fit"><img src="images/pic01.jpg" alt=""></a>
+                    </div>
+                </div>
+            </section>
+        </article>
 
-						<!-- Contact -->
-							<article id="feedback" class="panel">
-								<header>
-									<h2>Feedback</h2>
-								</header>
-								<form action="#" method="post">
-									<div>
-										<div class="row">
-											<div class="6u 12u$(mobile)">
-												<input type="text" name="name" placeholder="Name" />
-											</div>
-											<div class="6u$ 12u$(mobile)">
-												<input type="text" name="email" placeholder="Email" />
-											</div>
-											<div class="12u$">
-												<input type="text" name="subject" placeholder="Subject" />
-											</div>
-											<div class="12u$">
-												<textarea name="message" placeholder="Message" rows="8"></textarea>
-											</div>
-											<div class="12u$">
-												<input type="submit" value="Send Message" />
-											</div>
-										</div>
-									</div>
-								</form>
-							</article>
+        <!-- Contact -->
+        <article id="feedback" class="panel">
+            <header>
+                <h2>Feedback</h2>
+            </header>
+            <form action="#" method="post">
+                <div>
+                    <div class="row">
+                        <div class="6u 12u$(mobile)">
+                            <input type="text" name="name" placeholder="Name"/>
+                        </div>
+                        <div class="6u$ 12u$(mobile)">
+                            <input type="text" name="email" placeholder="Email"/>
+                        </div>
+                        <div class="12u$">
+                            <input type="text" name="subject" placeholder="Subject"/>
+                        </div>
+                        <div class="12u$">
+                            <textarea name="message" placeholder="Message" rows="8"></textarea>
+                        </div>
+                        <div class="12u$">
+                            <input type="submit" value="Send Message"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </article>
 
-					</div>
+    </div>
 
-				<!-- Footer -->
-					<div id="footer">
-						<ul class="copyright">
-							<li>&copy; Gitter.</li><li>Design: <a href="#">HTML5 by &#10041;</a></li>
-						</ul>
-					</div>
+    <!-- Footer -->
+    <div id="footer">
+        <ul class="copyright">
+            <li>&copy; Gitter.</li>
+            <li>Design: <a href="#">HTML5 by &#10041;</a></li>
+        </ul>
+    </div>
 
-			</div>
+</div>
 
-		<!-- Non AMD Scripts -->
-        <script src="js/theme/jquery.min.js"></script>
-        <script src="js/theme/skel.js"></script>
-        <script src="js/theme/skel-viewport.js"></script>
-        <script src="js/theme/util.js"></script>
-        <!--[if lte IE 8]>
-        <script src="js/theme/ie/respond.min.js"></script>
-        <![endif]-->
-        <script src="js/theme/main.js"></script>
+<!-- Non AMD Scripts -->
+<script src="js/theme/jquery.min.js"></script>
+<script src="js/theme/skel.js"></script>
+<script src="js/theme/skel-viewport.js"></script>
+<script src="js/theme/util.js"></script>
+<!--[if lte IE 8]>
+<script src="js/theme/ie/respond.min.js"></script>
+<![endif]-->
+<script src="js/theme/main.js"></script>
 
-        <!-- Load the script "js/main.js" as our entry point -->
-        <script data-main="js/main" src="js/lib/require.js"></script>
+<!-- Load the script "js/main.js" as our entry point -->
+<script data-main="js/main" src="js/lib/require.js"></script>
 
-	</body>
+</body>
 </html>
