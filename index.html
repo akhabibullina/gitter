@@ -5,7 +5,13 @@
 3. improve styles
 3. load all theme's js files via requirejs
 4. remove panel logic from main.js -- should be in router.js
-5. cghange hash on menu items click using router
+5. change hash on menu items click using router
+
+// todo:
+// 5. check & update the comments
+// 6. cleanup Contents and View
+// 7. HTML5 History
+
 -->
 <html>
 <head>
@@ -43,16 +49,12 @@
                 <h2>Issues List</h2>
             </header>
             <section>
-
+                <div class="row">
+                    <div id="default-message" class="6u 12u$(mobile)">
+                        List of the issues will be shown here.
+                    </div>
+                </div>
             </section>
-            <!--<header>-->
-            <!--<h1>Jane Doe</h1>-->
-            <!--<p>Senior Projectionist</p>-->
-            <!--</header>-->
-            <!--<a href="#work" class="jumplink pic">-->
-                <!--<span class="arrow icon fa-chevron-right"><span>See my work</span></span>-->
-                <!--<img src="images/me.jpg" alt=""/>-->
-            <!--</a>-->
             <div class="12u$">
                 <input id="more" type="submit" value="More"/>
             </div>
@@ -72,7 +74,7 @@
             </section>
         </article>
 
-        <!-- Contact -->
+        <!-- Feedback -->
         <article id="feedback" class="panel">
             <header>
                 <h2>Feedback</h2>

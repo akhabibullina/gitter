@@ -1,14 +1,4 @@
 // Filename: router.js
-
-// todo:
-// 1. get data from ruby endpoint
-// 2. create collections
-// 3. require js?
-// 4. add minified versions for js/lib
-// 5. check & update the comments
-// 6. cleanup Contents and View
-// 7. HTML5 History
-
 define([
   'jquery',
   'underscore',
@@ -35,6 +25,7 @@ define([
       },
 
       viewEmptyDocument: function() {
+        $('#issue-details').hide();
         $('#default-message').show();
       },
 
