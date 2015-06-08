@@ -20,8 +20,7 @@ define([
       state: {
         firstPage: 0,
         currentPage: 0,
-        // todo: revert to 25
-        pageSize: 5
+        pageSize: 25
       }
 
     });
@@ -63,7 +62,8 @@ define([
         $('#contents').show();
 
         // Inform the menu animation about the view change
-        $('.icon.fa-home')[0].dispatchEvent(new Event('click'));
+        var menuItem = $('.icon.fa-home');
+        menuItem[0] && menuItem[0].dispatchEvent(new Event('click'));
 
         // Update the view
         $('#contents section').html(this.el);

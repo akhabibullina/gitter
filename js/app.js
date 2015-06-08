@@ -1,5 +1,4 @@
 // Filename: app.js
-// todo: logging
 
 define([
   'jquery',
