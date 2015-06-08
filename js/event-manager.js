@@ -1,4 +1,4 @@
-// Filename: views/contents
+// Filename: event-manager.js
 define([
   'jquery',
   'underscore',

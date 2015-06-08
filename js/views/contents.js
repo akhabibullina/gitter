@@ -1,4 +1,5 @@
 // Filename: views/contents
+
 define([
   'jquery',
   'underscore',
@@ -7,13 +8,13 @@ define([
   'views/navigation-menu',
   'views/issue-list-item',
   'collections/issues-pageable'
-], function ($, _, Backbone, BaseView, NavigationMenu, DocumentListView, IssuesPageableCollection) {
+], function ($, _, Backbone, BaseView, NavigationMenu, IssueListView, IssuesPageableCollection) {
 
   var initialize = function () {
 
-    // Boostrapping the data as suggested at Backbone docs:
-    // http://documentcloud.github.io/backbone/#FAQ-bootstrap
+    // Boostrapping the data as suggested at Backbone docs: http://documentcloud.github.io/backbone/#FAQ-bootstrap
     var IssuesCollection = new IssuesPageableCollection([], {
+
       mode: "client",
 
       state: {
@@ -22,6 +23,7 @@ define([
         // todo: revert to 25
         pageSize: 5
       }
+
     });
 
     IssuesCollection.fetch({
@@ -29,7 +31,7 @@ define([
         new ContentsView({collection: issues}).render();
       },
       error: function () {
-        console.log('couldnt fetch');
+        console.log('Couldnt fetch collection.');
       }
     });
 
@@ -39,21 +41,33 @@ define([
 
       initialize: function () {
 
+        var that = this;
+
         this.ev.on('pagination:next', function () {
           new ContentsView({collection: IssuesCollection.getNextPage()}).render();
           console.log('fetching new page');
+        });
+
+        this.ev.on('document:selected, navigate:feedback', function () {
+          // To avoid memory leaks destroy the old view
+          that.remove();
         });
 
       },
 
       render: function () {
 
+        $('article').hide();
+        $('#contents').show();
+
+        $('.icon.fa-home')[0].dispatchEvent(new Event('click'));
+
         $('#contents section').html(this.el);
         (this.collection.models).forEach(function (document) {
-          this.$el.append(new DocumentListView({model: document}).render().el);
+          this.$el.append(new IssueListView({model: document}).render().el);
         }, this);
 
-
+        // Call the parent
         ContentsView.__super__.render.apply(this, arguments);
 
         return this;

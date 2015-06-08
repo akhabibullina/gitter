@@ -1,8 +1,10 @@
 <div id="issue-list">
-    <h4>Title: <%= title %></h4>
+    <h4>Title: <a href="#view/<%= number %>"> <%= title %></a></h4>
+    <img id="profile_photo" src="<%= user.avatar_url %>">
     <p>Number: <%= number %></p>
-    <p>Labels: <%= labels %></p>
-    <p>Username: <%= user.login %></p>
-    <p>Gravatar: <%= user.avatar_url %></p>
-    <p>Teaser: <%= body %> </p>
+    <% if (labels.length > 0) { %>
+        <p>Labels: <%= typeof(labels) %>
+    <% } %>
+    <p>Username: <a href="<%= user.html_url %>" target="_blank">@<%= user.login %></a></p>
+    <p>Teaser: <%= teaser %> </p>
 </div>

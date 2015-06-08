@@ -1,4 +1,7 @@
-//todo: escape to prevent js attack
+// Filename: collections/issues-pageable
+
+// todo: escape to prevent js attack
+// todo: reset bootstrapped data
 define([
   'underscore',
   'backbone',

@@ -1,6 +1,6 @@
 // Filename: main.js
 
-// Require.js allows us to configure shortcut alias
+// Require.js allows us to configure shortcut alias.
 // There usage will become more apparent further along in the tutorial.
 require.config({
   baseUrl: "js",
@@ -31,9 +31,9 @@ require.config({
 });
 
 require([
-  // Load our app module and pass it to our definition function
+  // Load our app module and pass it to our definition function.
   'app'
 ], function(App){
-  // The "app" dependency is passed in as "App"
+  // The "app" dependency is passed in as "App".
   App.initialize();
 });

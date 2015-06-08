@@ -8,6 +8,8 @@
  define, window, process, Packages,
  java, location, Components, FileUtils */
 
+// todo: minify
+
 define(['module'], function (module) {
   'use strict';
 

@@ -1,4 +1,5 @@
-// Filename: views/contents
+// Filename: views/issue-list-item.js
+
 define([
   'jquery',
   'underscore',
@@ -10,9 +11,12 @@ define([
 ], function($, _, Backbone, BaseView, IssueTeaserTemplate){
 
   var IssueListItemView = BaseView.extend({
+
     tagName: 'li',
+
     events: {
-      'click': function () {
+
+      'click h4': function () {
 
         this.ev.trigger('document:selected', this.model);
 
@@ -23,17 +27,21 @@ define([
       }
     },
     render: function () {
-      // Using Underscore we can compile our template with data
+
+      this.model.attributes.teaser = this.model.attributes.body.substring(0, 139);
+
+      // Using Underscore we can compile our template with data.
       var compiledTemplate = _.template(IssueTeaserTemplate)(this.model.attributes);
-      // Append our compiled template to this Views "el"
+      // Append our compiled template to this Views "el".
       this.$el.append( compiledTemplate );
 
       IssueListItemView.__super__.render.apply(this, arguments);
 
       return this;
+
     }
   });
 
-// Our module now returns our view
+  // The module now returns the view.
   return IssueListItemView;
 });

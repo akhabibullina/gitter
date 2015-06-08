@@ -1,4 +1,6 @@
 // Filename: app.js
+// todo: logging
+
 define([
   'jquery',
   'underscore',

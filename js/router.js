@@ -1,4 +1,5 @@
 // Filename: router.js
+
 define([
   'jquery',
   'underscore',
@@ -11,6 +12,7 @@ define([
   var initialize = function() {
 
     var DocumentRouter = Backbone.Router.extend({
+
       routes: {
         'contents': 'contents',
         'view': 'viewEmptyDocument',
@@ -25,8 +27,9 @@ define([
       },
 
       viewEmptyDocument: function() {
-        $('#issue-details').hide();
-        $('#default-message').show();
+        EventManager.trigger('navigate:empty-view');
+//        $('#issue-details').hide();
+//        $('#default-message').show();
       },
 
       viewDocument: function (number) {
@@ -34,13 +37,17 @@ define([
       },
 
       leaveFeedback: function() {
-        // do nothing
+        EventManager.trigger('navigate:feedback');
+        console.log('Navigated to Feedack Page');
+        // todo: add form submit
       },
 
       defaultAction: function(actions){
-        // We have no matching route, lets just log what the URL was
+        // We have no matching route, lets just log what the Home URL was
         console.log('No route:', actions);
+        router.navigate('contents', {trigger:true});
       }
+
     });
 
     var router = new DocumentRouter();
@@ -55,8 +62,6 @@ define([
       var urlPath = newAbsURL.substring(1);
       router.navigate(urlPath, {trigger: true});
     });
-
-    router.navigate('contents', {trigger:true});
   };
 
   return {

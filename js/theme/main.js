@@ -125,7 +125,7 @@
 											}, settings.resizeSpeed, 'swing');
 
 										// Reposition.
-											$body._reposition();
+//											$body._reposition();
 
 										// Resize main to height of new panel.
 											$main.animate({
@@ -150,7 +150,6 @@
 
 				// Nav + Jumplinks.
 					$nav_links.add($jumplinks).click(function(e) {
-                      console.log(1);
 						var t = $(this), href = t.attr('href'), id;
 
 						if (href.substring(0,1) == '#') {
@@ -179,8 +178,8 @@
 					$window
 						.on('orientationchange', function() {
 
-							if (!isLocked)
-								$body._reposition();
+//							if (!isLocked)
+//								$body._reposition();
 
 						});
 

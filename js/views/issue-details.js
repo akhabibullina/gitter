@@ -1,4 +1,5 @@
-// Filename: views/contents
+// Filename: views/issue-details
+
 define([
   'jquery',
   'underscore',
@@ -12,14 +13,14 @@ define([
 
   var IssueView = BaseView.extend({
 
-    el: $('#view section'),
+    el: $('#div'),
 
     initialize: function() {
 
      var that = this;
 
-     var a = new IssueModel({number: this.model.number});
-        a.fetch({
+     var IssueModelItem = new IssueModel({number: this.model.number});
+      IssueModelItem.fetch({
          success: function (data) {
            that.model = data.attributes;
            that.render();
@@ -29,20 +30,24 @@ define([
            // todo: show 'wrong id' message
          }
        });
+
+      this.ev.on('document:selected, navigate:feedback', function () {
+        // To avoid memory leaks destroy the old view
+        that.remove();
+      });
     },
 
     render: function () {
-      // todo: move to contents
-      $('#contents').hide();
 
-      // Using Underscore we can compile our template with data
-      var compiledTemplate = _.template(IssueDetailsTemplate)(this.model);
-      // Append our compiled template to this Views "el"
-      this.$el.append(compiledTemplate);
-
-      $('#default-message').hide();
+      $('article').hide();
       $('#view').show();
 
+      // Using Underscore we can compile our template with data.
+      var compiledTemplate = _.template(IssueDetailsTemplate)(this.model);
+      // Append our compiled template to this Views "el".
+      $('#view section').html(compiledTemplate);
+
+      $('#default-message').hide();
 
       IssueView.__super__.render.apply(this, arguments);
 
@@ -50,7 +55,7 @@ define([
     }
   });
 
-// Our module now returns our view
+  // The module now returns the view.
   return IssueView;
 
 });

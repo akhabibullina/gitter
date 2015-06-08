@@ -79,6 +79,9 @@ issue-details.html
 issue-teaser.html
 ```
 
+### Known Issues
+- HTML 5 Hash History
+
 ### Todo's
 
 - Unit Tests

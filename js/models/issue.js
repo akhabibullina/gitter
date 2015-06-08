@@ -2,7 +2,7 @@
 // todo: change the defaults according to real data
 define([
   'underscore',
-  'backbone',
+  'backbone'
 ], function(_, Backbone){
 
   var IssueModel = Backbone.Model.extend({
