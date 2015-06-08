@@ -25,8 +25,8 @@ Gitter uses a number of open source projects to work properly:
 * [RequireJs] - a JavaScript file and module loader
 * [Text!] - Require.js plugin that allows to load raw text as a dependency file
 * [Issues API]
-* [log4javascript] - a JavaScript logging framework based on the Java logging framework log4j
 * [qUnit] - A JavaScript Unit Testing framework
+* [YUI Compressor] - code minifier
 * [node.js] - evented I/O for the backend
 
 ### Structure and organization of the code
@@ -35,15 +35,17 @@ Gitter currently has the following structure
 
 * Routes handling the following paths:
 ```
-#contents      // Show the list of issues on Default Page
-#view/:issue   // Show detailed issue information on Issue Details Page
-#feedback      // Show Feedback form
-*              // Fallback to default behavior
+#contents          // Show the list of issues on Default Page
+#view              // Show empty Issues Details Page
+#view/:issue       // Show detailed issue information on Issue Details Page
+#feedback          // Show Feedback form
+*                  // Fallback to default behavior: navigate to Default Page
 ```
 * Events
 ```
-'issue:selected'
-'menu:changed'
+'issue:selected'    // triggers on every issue details request
+'menu:changed'      // triggers when the navigation menu changes
+'navigate:feedback' // this page doesn't have a separate view so we need an event for it
 ```
 * Models
 ```
@@ -103,7 +105,7 @@ MIT
 [RequireJs]: http://requirejs.org/
 [Text!]: https://github.com/requirejs/text
 [Issues API]: https://developer.github.com/v3/issues/
-[log4javascript]: http://log4javascript.org/docs/index.html
+[YUI Compressor]: http://yui.github.io/yuicompressor/
 [qUnit]: http://qunitjs.com/
 [node.js]:http://nodejs.org
 [jQuery]:http://jquery.com
