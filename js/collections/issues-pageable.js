@@ -16,8 +16,10 @@ define([
   }, {
     mode: 'client',
     success: function (data) {
-      console.log('loaded: ' + data.length);
 //    ev.trigger('itemList:reset');
+  },
+  error: function(e) {
+    console.log('Error occured while pagination: ' + e);
   }});
 
   return IssuesPageableCollection;

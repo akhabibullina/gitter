@@ -1,6 +1,5 @@
 // Filename: views/navigation-menu
 
-// todo: add namespaces? http://codebeerstartups.com/2012/12/12-listening-to-dom-events-in-backbone-js-learning-backbone-js/
 define([
   'jquery',
   'underscore',

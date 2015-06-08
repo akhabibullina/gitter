@@ -30,6 +30,7 @@ define([
 
       this.model.attributes.teaser = this.model.attributes.body.substring(0, 139);
 
+      // Update the view
       // Using Underscore we can compile our template with data.
       var compiledTemplate = _.template(IssueTeaserTemplate)(this.model.attributes);
       // Append our compiled template to this Views "el".

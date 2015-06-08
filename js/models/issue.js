@@ -1,5 +1,5 @@
 // Filename: models/project
-// todo: change the defaults according to real data
+// todo: validate the model
 define([
   'underscore',
   'backbone'
@@ -15,15 +15,14 @@ define([
     defaults: {
       number: 0,
       title: 'Untitled',
-      labels: '',
+      labels: [],
       state: 'N/A',
-      username: 'anonymous',
-      photo: '',
+      user: {'login': 'anonymous', 'html_url': '', 'avatar_url': ''},
       summary: 'To Be Continued',
       teaser: 'Something 140char',
-      comments: {}
+      comments: 0
     }
-  })
+  });
 
   // Return the model for the module
   return IssueModel;

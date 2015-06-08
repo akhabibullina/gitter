@@ -39,15 +39,16 @@ define([
 
     render: function () {
 
+      // Show the current view
       $('article').hide();
       $('#view').show();
+      $('#default-message').hide();
 
+      // Inform the menu animation about the view change
       // Using Underscore we can compile our template with data.
       var compiledTemplate = _.template(IssueDetailsTemplate)(this.model);
       // Append our compiled template to this Views "el".
       $('#view section').html(compiledTemplate);
-
-      $('#default-message').hide();
 
       IssueView.__super__.render.apply(this, arguments);
 

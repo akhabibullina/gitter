@@ -28,8 +28,6 @@ define([
 
       viewEmptyDocument: function() {
         EventManager.trigger('navigate:empty-view');
-//        $('#issue-details').hide();
-//        $('#default-message').show();
       },
 
       viewDocument: function (number) {
@@ -39,7 +37,7 @@ define([
       leaveFeedback: function() {
         EventManager.trigger('navigate:feedback');
         console.log('Navigated to Feedack Page');
-        // todo: add form submit
+        // todo: add form submit for some test email address :)
       },
 
       defaultAction: function(actions){

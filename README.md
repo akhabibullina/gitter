@@ -22,7 +22,6 @@ Gitter uses a number of open source projects to work properly:
 * [BackboneJs] - Backbone.js gives structure to web applications
 * [jQuery] - Backbone's dependency and helper for DOM manipulation tasks
 * [Underscore] - great UI boilerplate for modern web apps
-* [Backbone.LocalStorage] - Backbone plugin that uses browser's LocalStorage for persistence
 * [RequireJs] - a JavaScript file and module loader
 * [Text!] - Require.js plugin that allows to load raw text as a dependency file
 * [Issues API]
@@ -84,14 +83,12 @@ issue-teaser.html
 
 ### Todo's
 
-- Unit Tests
-- Automate JSHint
-- Concatenate the files into one file(fewer HTTP requests)
+- Add more unit tests
+- Automate JSHint(GruntJs)
+- Concatenate and minify the files into one "build" file(GruntJs)
 - Logging mechanism
 - Handle exceptions
-- Code Commenting
-- Cleanup
-- Add NodeJs server for simplicity
+- Use [Backbone.LocalStorage] - Backbone plugin that uses browser's LocalStorage for persistence or add NodeJs server for simplicity
 
 License
 ----

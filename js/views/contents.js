@@ -35,6 +35,7 @@ define([
       }
     });
 
+
     var ContentsView = BaseView.extend({
 
       tagName: 'ul',
@@ -57,11 +58,14 @@ define([
 
       render: function () {
 
+        // Show the current view
         $('article').hide();
         $('#contents').show();
 
+        // Inform the menu animation about the view change
         $('.icon.fa-home')[0].dispatchEvent(new Event('click'));
 
+        // Update the view
         $('#contents section').html(this.el);
         (this.collection.models).forEach(function (document) {
           this.$el.append(new IssueListView({model: document}).render().el);
