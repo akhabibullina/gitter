@@ -52,15 +52,19 @@ define([
     Backbone.history.start();
 
     EventManager.on('document:selected', function(issue) {
+      // Remember where we are
       var urlPath = 'view/' + issue.get('number');
       router.navigate(urlPath, {trigger: true});
     });
 
     EventManager.on('menu:changed', function(newAbsURL) {
+      // Remember where we are
       var urlPath = newAbsURL.substring(1);
       router.navigate(urlPath, {trigger: true});
     });
   };
+
+  // todo: add pagination events handlers here
 
   return {
     initialize: initialize

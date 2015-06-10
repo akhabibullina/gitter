@@ -7,16 +7,16 @@ require.config({
   paths: {
     jquery: '//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min',
     lib: '../js/lib',
-    underscore: 'lib/underscore',
-    backbone: 'lib/backbone',
+    underscore: 'js/lib/underscore',
+    backbone: 'js/lib/backbone',
     template: '../templates'
   }
 });
 
 require([
   // Load our app module and pass it to our definition function.
-  'tests/pp'
-], function(pp){
+  'tests/app-tests'
+], function(appTests){
   // The "app" dependency is passed in as "App".
-  pp.initialize();
+  appTests.initialize();
 });
