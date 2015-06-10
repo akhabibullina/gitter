@@ -14,66 +14,71 @@ define([
   var initialize = function () {
 
     var pageNumber = 1;
+    var url = 'https://api.github.com/repos/rails/rails/issues';
 
     function getPageableIssuesContent(pageNumber) {
-      // todo: Boostrapping the data as suggested at Backbone docs: http://documentcloud.github.io/backbone/#FAQ-bootstrap
+      // todo: cache request responses https://developer.github.com/v3/#conditional-requests
 
-      // todo: cache request responses
-      $.get('https://api.github.com/repos/rails/rails/issues', function(data){
+      if (localStorage.getItem("If-None-Match")) {
 
-        var IssuesCollection = new IssuesPageableCollection(data);
-
-        IssuesCollection.each(function(model) {
-          model.save();
+        // Check if the data has been modified
+        $.ajax({
+          url: url,
+          type: 'head',
+          statusCode: {
+            // Success
+            200: function (xhr) {
+              displayIssues(xhr);
+            }
+          }
         });
-
-        var c = new ContentsView({collection: IssuesCollection}).render();
-
-        //people.fetch({// view xhr network
-        //  success: function () {
-        //    JSON.stringify(people);
-        //  }
-        //});
-
-        //IssuesCollection.fetch({
-        //  ajaxSync: true,
-        //  success: function (issues) {
-        //    //IssuesCollection.save(issues);
-        //    var c = new ContentsView({collection: issues}).render();
-        //  },
-        //  error: function () {
-        //    console.log('Couldnt fetch collection.');
-        //  }
-        //});
+      } else {
+        displayNewResource();
+      }
+    };
 
 
-        /*
-         var Person = Backbone.Model.extend({}),
-         People = Backbone.Collection.extend({
-         model: Person,
-         localStorage: new Backbone.LocalStorage("People")
-         });
+    /*** HELPERS ***/
 
-         var people = new People({}).fetch({
-         success: function (issues) {
-         JSON.stringify(people);
-         },
-         error: function () {
-         console.log('Couldnt fetch collection.');
-         }
-         });
-         */
-      });
-
-      //IssuesCollection.fetch({
-      //  success: function (issues) {
-      //    var c = new ContentsView({collection: issues}).render();
-      //  },
-      //  error: function () {
-      //    console.log('Couldnt fetch collection.');
-      //  }
-      //});
+    function displayIssues(xhr) {
+      if (isModified(xhr)) {
+        displayNewResource();
+      } else {
+        displayCachedResource();
+      }
     }
+
+    function isModified(xhr) {
+      return localStorage["If-None-Match"] != getETagHeader(xhr.getResponseHeader("ETag"));
+    };
+
+    function getETagHeader(ETagString) {
+      return JSON.parse(ETagString.substring(2));
+    };
+
+    function displayCachedResource() {
+      var IssuesCollection = new IssuesPageableCollection({});
+      IssuesCollection.fetch({
+        success: function (issues) {
+          var c = new ContentsView({collection: issues}).render();
+        }
+      })
+    };
+
+    function displayNewResource() {
+      $.ajax({
+        'url': url,
+        'ifModified': true,
+        success: function (data, code, xhr) {
+          localStorage["If-None-Match"] = getETagHeader(xhr.getResponseHeader("ETag"));
+          var IssuesCollection = new IssuesPageableCollection(data);
+          IssuesCollection.each(function (model) {
+            model.save();
+          });
+          var c = new ContentsView({collection: IssuesCollection}).render();
+        }
+      })
+    };
 
     getPageableIssuesContent(pageNumber);
 
