@@ -7,7 +7,8 @@ define([
   'views/base',
   'views/navigation-menu',
   'views/issue-list-item',
-  'collections/issues-pageable'
+  'collections/issues-pageable',
+  'localstorage'
 ], function ($, _, Backbone, BaseView, NavigationMenu, IssueListView, IssuesPageableCollection) {
 
   var initialize = function () {
@@ -15,17 +16,63 @@ define([
     var pageNumber = 1;
 
     function getPageableIssuesContent(pageNumber) {
-      // Boostrapping the data as suggested at Backbone docs: http://documentcloud.github.io/backbone/#FAQ-bootstrap
-      var IssuesCollection = new IssuesPageableCollection({pageNumber: pageNumber});
+      // todo: Boostrapping the data as suggested at Backbone docs: http://documentcloud.github.io/backbone/#FAQ-bootstrap
 
-      IssuesCollection.fetch({
-        'success': function (issues) {
-          new ContentsView({collection: issues}).render();
-        },
-        error: function () {
-          console.log('Couldnt fetch collection.');
-        }
+      // todo: cache request responses
+      $.get('https://api.github.com/repos/rails/rails/issues', function(data){
+
+        var IssuesCollection = new IssuesPageableCollection(data);
+
+        IssuesCollection.each(function(model) {
+          model.save();
+        });
+
+        var c = new ContentsView({collection: IssuesCollection}).render();
+
+        //people.fetch({// view xhr network
+        //  success: function () {
+        //    JSON.stringify(people);
+        //  }
+        //});
+
+        //IssuesCollection.fetch({
+        //  ajaxSync: true,
+        //  success: function (issues) {
+        //    //IssuesCollection.save(issues);
+        //    var c = new ContentsView({collection: issues}).render();
+        //  },
+        //  error: function () {
+        //    console.log('Couldnt fetch collection.');
+        //  }
+        //});
+
+
+        /*
+         var Person = Backbone.Model.extend({}),
+         People = Backbone.Collection.extend({
+         model: Person,
+         localStorage: new Backbone.LocalStorage("People")
+         });
+
+         var people = new People({}).fetch({
+         success: function (issues) {
+         JSON.stringify(people);
+         },
+         error: function () {
+         console.log('Couldnt fetch collection.');
+         }
+         });
+         */
       });
+
+      //IssuesCollection.fetch({
+      //  success: function (issues) {
+      //    var c = new ContentsView({collection: issues}).render();
+      //  },
+      //  error: function () {
+      //    console.log('Couldnt fetch collection.');
+      //  }
+      //});
     }
 
     getPageableIssuesContent(pageNumber);
