@@ -17,7 +17,6 @@ define([
     var url = 'https://api.github.com/repos/rails/rails/issues';
 
     function getPageableIssuesContent(pageNumber) {
-      // todo: cache request responses https://developer.github.com/v3/#conditional-requests
 
       if (localStorage.getItem("If-None-Match")) {
 

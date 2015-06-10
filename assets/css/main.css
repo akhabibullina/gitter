@@ -1008,6 +1008,24 @@ li {
     margin: 18px 0;
 }
 
+#comments {
+    margin-top: 20px;
+}
+
+#comments .comment{
+    margin: 5px 0;
+    background-color: lightcyan;
+}
+
+#comments #profile_photo {
+    width: 50px;
+    background-color: lightcyan;
+}
+
+#comments {
+    font-size: 10px;
+}
+
 .more-btn {
     text-align: center;
 }

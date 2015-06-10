@@ -1,0 +1,17 @@
+<div id="comments">
+
+    <% _.each(comments_list, function(comment) { %>
+
+        <div class="comment">
+            <h5>Comment # <%  %> :</h5>
+
+            <img id="profile_photo" src="<%= comment.user.avatar_url %>">
+
+            <p><a href="<%= comment.user.html_url %>" target="_blank">@<%= comment.user.login %></a></p>
+
+            <p> <%= comment.body %> </p>
+        </div>
+
+    <% }); %>
+
+</div>
