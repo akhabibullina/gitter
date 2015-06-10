@@ -10,10 +10,13 @@ define([
   var initialize = function() {
     var PaginationMenu = BaseView.extend({
 
-      el: $('#more'),
+      el: $('#pagination'),
 
       events: {
-        'click': function () {
+        'click #prev': function () {
+          this.ev.trigger('pagination:prev');
+        },
+        'click #more': function () {
           this.ev.trigger('pagination:next');
         }
       }

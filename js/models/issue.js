@@ -6,12 +6,6 @@ define([
 ], function(_, Backbone){
 
   var IssueModel = Backbone.Model.extend({
-    initialize: function(attributes) {
-      this.number = attributes.number;
-    },
-    url: function(){
-      return 'https://api.github.com/repos/rails/rails/issues/' + this.number;
-    },
     defaults: {
       number: 0,
       title: 'Untitled',

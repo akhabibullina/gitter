@@ -12,28 +12,23 @@ define([
 
   var initialize = function () {
 
-    // Boostrapping the data as suggested at Backbone docs: http://documentcloud.github.io/backbone/#FAQ-bootstrap
-    var IssuesCollection = new IssuesPageableCollection([], {
+    var pageNumber = 1;
 
-      mode: "client",
+    function getPageableIssuesContent(pageNumber) {
+      // Boostrapping the data as suggested at Backbone docs: http://documentcloud.github.io/backbone/#FAQ-bootstrap
+      var IssuesCollection = new IssuesPageableCollection({pageNumber: pageNumber});
 
-      state: {
-        firstPage: 0,
-        currentPage: 0,
-        pageSize: 25
-      }
+      IssuesCollection.fetch({
+        'success': function (issues) {
+          new ContentsView({collection: issues}).render();
+        },
+        error: function () {
+          console.log('Couldnt fetch collection.');
+        }
+      });
+    }
 
-    });
-
-    IssuesCollection.fetch({
-      'success': function (issues) {
-        new ContentsView({collection: issues}).render();
-      },
-      error: function () {
-        console.log('Couldnt fetch collection.');
-      }
-    });
-
+    getPageableIssuesContent(pageNumber);
 
     var ContentsView = BaseView.extend({
 
@@ -44,8 +39,14 @@ define([
         var that = this;
 
         this.ev.on('pagination:next', function () {
-          new ContentsView({collection: IssuesCollection.getNextPage()}).render();
-          console.log('fetching new page');
+          getPageableIssuesContent(++pageNumber);
+          console.log('fetching next page');
+        });
+
+        // todo:
+        this.ev.on('pagination:prev', function () {
+          getPageableIssuesContent(--pageNumber);
+          console.log('fetching prev page');
         });
 
         this.ev.on('document:selected, navigate:feedback', function () {

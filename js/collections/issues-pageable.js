@@ -6,21 +6,26 @@ define([
   'underscore',
   'backbone',
   // Pull in the Model module from above
-  'models/issue',
-  'lib/backbone.paginator'
-], function(_, Backbone, IssueModel){
+  'models/issue'
+], function (_, Backbone, IssueModel) {
 
-  var IssuesPageableCollection = Backbone.PageableCollection.extend({
+  var IssuesPageableCollection = Backbone.Collection.extend({
+    initialize: function (attributes) {
+      this.pageNumber = attributes.pageNumber;
+    },
     model: IssueModel,
-    url: 'https://api.github.com/repos/rails/rails/issues'
+    url: function () {
+      // todo: change per_page to 25!
+      return 'https://api.github.com/repos/rails/rails/issues?page=' + this.pageNumber + '&per_page=5';
+    }
   }, {
-    mode: 'client',
     success: function (data) {
 //    ev.trigger('itemList:reset');
-  },
-  error: function(e) {
-    console.log('Error occured while pagination: ' + e);
-  }});
+    },
+    error: function (e) {
+      console.log('Error occured while pagination: ' + e);
+    }
+  });
 
   return IssuesPageableCollection;
 });

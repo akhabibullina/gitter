@@ -8,8 +8,8 @@ define([
   // Using the Require.js text! plugin, we are loaded raw text which will be used as our views primary template
   // https://github.com/requirejs/text
   'text!../template/issue-details.html',
-  'models/issue'
-], function ($, _, Backbone, BaseView, IssueDetailsTemplate, IssueModel) {
+  'models/issue-details'
+], function ($, _, Backbone, BaseView, IssueDetailsTemplate, IssueDetailsModel) {
 
   var IssueView = BaseView.extend({
 
@@ -19,7 +19,7 @@ define([
 
      var that = this;
 
-     var IssueModelItem = new IssueModel({number: this.model.number});
+     var IssueModelItem = new IssueDetailsModel({number: this.model.number});
       IssueModelItem.fetch({
          success: function (data) {
            that.model = data.attributes;

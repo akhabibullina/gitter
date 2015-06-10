@@ -7,7 +7,6 @@
         <% } %>
     <p>Username: <a href="<%= user.html_url %>" target="_blank">@<%= user.login %></a></p>
     <p>Summary: <%= body %> </p>
-    <% if (comments > 0) { %>
-        <p>Comment # <%= i %> : <%= comments[i] %> </p>
-    <% } %>
+    <!--http://localhost:63342/gitter/index.html#view/20497-->
+    <% _.each(comments_url, function(i) { %> <p>Comment # <%= i %> : </p> <% }); %>
 </div>

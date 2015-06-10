@@ -1012,8 +1012,10 @@ li {
     text-align: center;
 }
 
-#more {
-    width: 30%;
+#pagination input {
+    float: left;
+    width: 40%;
+    margin: 0 5%;
 }
 
 #profile_photo {
