@@ -7,10 +7,11 @@ define([
   'views/base'
 ], function ($, _, Backbone, BaseView) {
 
+  var paginationMenu;
+  var PAGINATION_WRAPPER_SELECTOR = '#pagination';
+
   var initialize = function() {
     var PaginationMenu = BaseView.extend({
-
-      el: $('#pagination'),
 
       events: {
         'click #prev': function () {
@@ -23,10 +24,12 @@ define([
 
     });
 
-    new PaginationMenu();
+    // The element is already in the page, simply select it.
+    paginationMenu = new PaginationMenu({el: $(PAGINATION_WRAPPER_SELECTOR)});
   };
 
   return {
-    initialize: initialize
+    initialize: initialize,
+    getInstance: function() { return paginationMenu }
   };
 });

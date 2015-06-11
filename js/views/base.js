@@ -4,7 +4,7 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  '../event-manager'
+  'event-manager'
 ], function($, _, Backbone, EventManager){
 
   return Backbone.View.extend({

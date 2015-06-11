@@ -7,12 +7,15 @@ define([
   'views/base'
 ], function ($, _, Backbone, BaseView) {
 
+  var navigationMenu;
+  var NAVIGATION_WRAPPER_SELECTOR = '#nav';
+
   var initialize = function() {
 
     var NavigationMenu = BaseView.extend({
 
       events: {
-        'click': function (e) {
+        'click a': function (e) {
           this.activate(e);
         }
 
@@ -28,12 +31,13 @@ define([
       }
     });
 
-    new NavigationMenu({el: $('#nav a')});
+    navigationMenu = new NavigationMenu({el: $(NAVIGATION_WRAPPER_SELECTOR)});
 
   };
 
   return {
-    initialize: initialize
+    initialize: initialize,
+    getInstance: function() { return navigationMenu }
   };
 
 });

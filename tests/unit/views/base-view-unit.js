@@ -1,26 +1,26 @@
 var issue;
-// todo: review the names of the test
-define([
+require([
   'jquery',
   'underscore',
   'backbone',
-  '../../../js/views/base'
-], function($, _, Backbone, BaseView){
+  'views/base'
+], function ($, _, Backbone, BaseView) {
 
   var baseView;
 
   QUnit.module("Issue Backbone Base View", {
-    setup: function( assert ) {
+    setup: function () {
       baseView = new BaseView();
     },
-    teardown: function( assert ) {
+    teardown: function () {
       baseView = null;
     }
   });
 
-  test( "Should contain 'ev' property that is equal to Events object in Backbone", function() {
-    ok(baseView.ev, 'contains ev property');
-    deepEqual( baseView.ev, Backbone.Events,  "the test succeeds");
+  test("[init] extends Backbone Object with 'ev' property that is equal to Events object in Backbone", function () {
+    ok(baseView instanceof Backbone.View, 'Inherits Backbone View Object');
+    ok(baseView.ev, '"ev" property exists');
+    deepEqual(baseView.ev, Backbone.Events, '"ev" property is equal to Event Object');
   });
 
 });

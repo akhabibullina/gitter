@@ -3,20 +3,27 @@
 // Require.js allows us to configure shortcut alias.
 // There usage will become more apparent further along in the tutorial.
 require.config({
-  baseUrl: "../",
+  baseUrl: "../js",
   paths: {
     jquery: '//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min',
-    lib: '../js/lib',
-    underscore: 'js/lib/underscore',
-    backbone: 'js/lib/backbone',
-    template: '../templates'
+    lib: '../lib',
+    underscore: 'lib/underscore',
+    backbone: 'lib/backbone',
+    template: '../templates',
+    Squire: '../tests/lib/squire'
   }
 });
 
 require([
   // Load our app module and pass it to our definition function.
-  'tests/app-tests'
-], function(appTests){
-  // The "app" dependency is passed in as "App".
-  appTests.initialize();
+  '../tests/unit/views/base-view-unit',
+  '../tests/unit/views/pagination-menu-unit',
+  '../tests/unit/views/navigation-menu-unit',
+
+  '../tests/unit/models/issue-details-unit',
+  '../tests/unit/models/issue-unit',
+
+  '../tests/unit/collections/issues-pageable-unit'
+], function(){
+
 });

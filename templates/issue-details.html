@@ -1,12 +1,14 @@
 <div id="issue-details">
     <h4>Title: <a href="#view/<%= number %>"> <%= title %></a></h4>
     <img id="profile_photo" src="<%= user.avatar_url %>">
+
     <p>Status: <%= state %></p>
     <% if (labels.length > 0) { %>
-    <p>Labels: <%= typeof(labels) %>
-        <% } %>
+        <p>Labels: <%= typeof(labels) %>
+    <% } %>
+
     <p>Username: <a href="<%= user.html_url %>" target="_blank">@<%= user.login %></a></p>
+
     <p>Summary: <%= body %> </p>
-    <!--http://localhost:63342/gitter/index.html#view/20497-->
-    <% _.each(comments_url, function(i) { %> <p>Comment # <%= i %> : </p> <% }); %>
+
 </div>
