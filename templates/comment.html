@@ -2,15 +2,16 @@
 
     <% _.each(comments_list, function(comment) { %>
 
-        <div class="comment">
-            <h5>Comment # <%  %> :</h5>
+    <div class="comment">
 
-            <img id="profile_photo" src="<%= comment.user.avatar_url %>">
+        <h5>Comment # <% %> :</h5>
 
-            <p><a href="<%= comment.user.html_url %>" target="_blank">@<%= comment.user.login %></a></p>
+        <img id="profile_photo" src="<%= comment.user.avatar_url %>">
 
-            <p> <%= comment.body %> </p>
-        </div>
+        <p><a href="<%= comment.user.html_url %>" target="_blank">@<%= comment.user.login %></a></p>
+
+        <p> <%= comment.body %> </p>
+    </div>
 
     <% }); %>
 

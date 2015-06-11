@@ -13,6 +13,12 @@ define([
 
   var initialize = function () {
 
+    var
+      ARTICLE_SELECTOR = 'article',
+      SECTION_SELECTOR = 'section',
+      CONTENTS_ID = '#contents',
+      HOME_ICON = '.icon.fa-home';
+
     var pageNumber = 1;
     var url = 'https://api.github.com/repos/rails/rails/issues';
 
@@ -36,7 +42,6 @@ define([
       }
     };
 
-
     /*** HELPERS ***/
 
     function displayIssues(xhr) {
@@ -45,7 +50,7 @@ define([
       } else {
         displayCachedResource();
       }
-    }
+    };
 
     function isModified(xhr) {
       return localStorage["If-None-Match"] != getETagHeader(xhr.getResponseHeader("ETag"));
@@ -59,7 +64,10 @@ define([
       var IssuesCollection = new IssuesPageableCollection({});
       IssuesCollection.fetch({
         success: function (issues) {
-          var c = new ContentsView({collection: issues}).render();
+          new ContentsView({collection: issues}).render();
+        },
+        error: function () {
+          console.log('Error occured while fetching the issues from LocalStorage');
         }
       })
     };
@@ -74,7 +82,10 @@ define([
           IssuesCollection.each(function (model) {
             model.save();
           });
-          var c = new ContentsView({collection: IssuesCollection}).render();
+          new ContentsView({collection: IssuesCollection}).render();
+        },
+        error: function () {
+          console.log('Error occured while fetching the issues from Github API server');
         }
       })
     };
@@ -91,13 +102,13 @@ define([
 
         this.ev.on('pagination:next', function () {
           getPageableIssuesContent(++pageNumber);
-          console.log('fetching next page');
+          console.log('Fetching next page');
         });
 
         // todo:
         this.ev.on('pagination:prev', function () {
           getPageableIssuesContent(--pageNumber);
-          console.log('fetching prev page');
+          console.log('Fetching prev page');
         });
 
         this.ev.on('document:selected, navigate:feedback', function () {
@@ -110,15 +121,15 @@ define([
       render: function () {
 
         // Show the current view
-        $('article').hide();
-        $('#contents').show();
+        $(ARTICLE_SELECTOR).hide();
+        $(CONTENTS_ID).show();
 
         // Inform the menu animation about the view change
-        var menuItem = $('.icon.fa-home');
+        var menuItem = $(HOME_ICON);
         menuItem[0] && menuItem[0].dispatchEvent(new Event('click'));
 
         // Update the view
-        $('#contents section').html(this.el);
+        $(CONTENTS_ID + ' ' + SECTION_SELECTOR).html(this.el);
         (this.collection.models).forEach(function (document) {
           this.$el.append(new IssueListView({model: document}).render().el);
         }, this);

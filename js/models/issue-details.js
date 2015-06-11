@@ -4,13 +4,13 @@ define([
   'underscore',
   'backbone',
   'models/issue'
-], function(_, Backbone, IssueModel){
+], function (_, Backbone, IssueModel) {
 
   var IssueDetailsModel = IssueModel.extend({
-    initialize: function(attributes) {
+    initialize: function (attributes) {
       this.number = attributes.number;
     },
-    url: function(){
+    url: function () {
       return 'https://api.github.com/repos/rails/rails/issues/' + this.number;
     }
   });

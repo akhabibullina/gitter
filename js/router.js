@@ -7,9 +7,9 @@ define([
   'event-manager',
   'views/contents',
   'views/issue-details'
-], function($, _, Backbone, EventManager, ContentsView, IssueView){
+], function ($, _, Backbone, EventManager, ContentsView, IssueView) {
 
-  var initialize = function() {
+  var initialize = function () {
 
     var DocumentRouter = Backbone.Router.extend({
 
@@ -26,7 +26,7 @@ define([
         ContentsView.initialize();
       },
 
-      viewEmptyDocument: function() {
+      viewEmptyDocument: function () {
         EventManager.trigger('navigate:empty-view');
       },
 
@@ -34,16 +34,16 @@ define([
         new IssueView({model: {'number': number}});
       },
 
-      leaveFeedback: function() {
+      leaveFeedback: function () {
         EventManager.trigger('navigate:feedback');
-        console.log('Navigated to Feedack Page');
+        console.log('Navigate to Feedback Page');
         // todo: add form submit for some test email address :)
       },
 
-      defaultAction: function(actions){
+      defaultAction: function () {
         // We have no matching route, lets just log what the Home URL was
-        console.log('No route:', actions);
-        router.navigate('contents', {trigger:true});
+        console.log('No route provided, fallback to default one.');
+        router.navigate('contents', {trigger: true});
       }
 
     });
@@ -51,13 +51,13 @@ define([
     var router = new DocumentRouter();
     Backbone.history.start();
 
-    EventManager.on('document:selected', function(issue) {
+    EventManager.on('document:selected', function (issue) {
       // Remember where we are
       var urlPath = 'view/' + issue.get('number');
       router.navigate(urlPath, {trigger: true});
     });
 
-    EventManager.on('menu:changed', function(newAbsURL) {
+    EventManager.on('menu:changed', function (newAbsURL) {
       // Remember where we are
       var urlPath = newAbsURL.substring(1);
       router.navigate(urlPath, {trigger: true});

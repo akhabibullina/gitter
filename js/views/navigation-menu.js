@@ -10,7 +10,7 @@ define([
   var navigationMenu;
   var NAVIGATION_WRAPPER_SELECTOR = '#nav';
 
-  var initialize = function() {
+  var initialize = function () {
 
     var NavigationMenu = BaseView.extend({
 
@@ -37,7 +37,9 @@ define([
 
   return {
     initialize: initialize,
-    getInstance: function() { return navigationMenu }
+    getInstance: function () {
+      return navigationMenu
+    }
   };
 
 });

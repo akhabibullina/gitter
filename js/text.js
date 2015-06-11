@@ -64,7 +64,8 @@ define(['module'], function (module) {
           progId = progIds[i];
           try {
             xhr = new ActiveXObject(progId);
-          } catch (e) {}
+          } catch (e) {
+          }
 
           if (xhr) {
             progIds = [progId];  // so faster next time
@@ -209,9 +210,9 @@ define(['module'], function (module) {
       if (buildMap.hasOwnProperty(moduleName)) {
         var content = text.jsEscape(buildMap[moduleName]);
         write.asModule(pluginName + "!" + moduleName,
-            "define(function () { return '" +
-            content +
-            "';});\n");
+          "define(function () { return '" +
+          content +
+          "';});\n");
       }
     },
 
@@ -244,10 +245,7 @@ define(['module'], function (module) {
 
   if (masterConfig.env === 'node' || (!masterConfig.env &&
     typeof process !== "undefined" &&
-    process.versions &&
-    !!process.versions.node &&
-    !process.versions['node-webkit'] &&
-    !process.versions['atom-shell'])) {
+    process.versions && !!process.versions.node && !process.versions['node-webkit'] && !process.versions['atom-shell'])) {
     //Using special require.nodeRequire, something added by r.js.
     fs = require.nodeRequire('fs');
 

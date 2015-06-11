@@ -44,7 +44,7 @@ require([
         assert.ok(data);
         done();
       },
-      error: function() {
+      error: function () {
         done();
       }
     });

@@ -12,34 +12,41 @@ define([
   'models/issue-details'
 ], function ($, _, Backbone, BaseView, IssueDetailsTemplate, CommentTemplate, IssueDetailsModel) {
 
+  var
+    ARTICLE_SELECTOR = 'article',
+    VIEW_ID = '#view',
+    VIEWS_SECTION_SELECTOR = '#view section',
+    DEFAULT_MSG_ID = '#default-message',
+    ISSUE_DETAILS_ID = '#issue-details';
+
   var IssueView = BaseView.extend({
 
     el: $('#div'),
 
-    initialize: function() {
+    initialize: function () {
 
-     var that = this;
+      var that = this;
 
-     var IssueModelItem = new IssueDetailsModel({number: this.model.number});
+      var IssueModelItem = new IssueDetailsModel({number: this.model.number});
       IssueModelItem.fetch({
-         success: function (data) {
-           that.model = data.attributes;
+        success: function (data) {
+          that.model = data.attributes;
 
-           if (that.model.comments > 0) {
-             // fetch comments
-             $.get(that.model.comments_url, function(data) {
-               that.model.comments_list = data;
-               that.render();
-             })
-           } else {
-             that.render();
-           }
-         },
-         error: function(e) {
-           console.log('Unable to get the info for selected item.' + e);
-           // todo: show 'wrong id' message
-         }
-       });
+          if (that.model.comments > 0) {
+            // fetch comments
+            $.get(that.model.comments_url, function (data) {
+              that.model.comments_list = data;
+              that.render();
+            })
+          } else {
+            that.render();
+          }
+        },
+        error: function (e) {
+          console.log('Unable to get the info for selected item.' + e);
+          // todo: show 'wrong id' message
+        }
+      });
 
       this.ev.on('document:selected, navigate:feedback', function () {
         // To avoid memory leaks destroy the old view
@@ -50,24 +57,26 @@ define([
     render: function () {
 
       // Show the current view
-      $('article').hide();
-      $('#view').show();
-      $('#default-message').hide();
+      $(ARTICLE_SELECTOR).hide();
+      $(VIEW_ID).show();
+      $(DEFAULT_MSG_ID).hide();
 
       // Inform the menu animation about the view change
       // Using Underscore we can compile our template with data.
       var compiledTemplate = _.template(IssueDetailsTemplate)(this.model);
       // Append our compiled template to this Views "el".
-      $('#view section').html(compiledTemplate);
+      $(VIEWS_SECTION_SELECTOR).html(compiledTemplate);
 
       if (this.model.comments > 0) {
         // Show comments if any
         var subTemplate = _.template(CommentTemplate)({'comments_list': this.model.comments_list});
         // Append our compiled template to this Views "el".
-        $('#issue-details').append(subTemplate);
+        $(ISSUE_DETAILS_ID).append(subTemplate);
       }
 
-      setTimeout(function(){IssueView.__super__.render.apply(this, arguments)}, 0);
+      setTimeout(function () {
+        IssueView.__super__.render.apply(this, arguments)
+      }, 0);
 
       return this;
     }

@@ -7,9 +7,9 @@ define([
   'router', // Request router.js
   'views/navigation-menu',
   'views/pagination-menu'
-], function($, _, Backbone, Router, NavMenuView, PaginationMenuView){
+], function ($, _, Backbone, Router, NavMenuView, PaginationMenuView) {
 
-  var initialize = function(){
+  var initialize = function () {
 
     // Pass in our Router module and call it's initialize function
     Router.initialize();
