@@ -9,7 +9,7 @@ define([
 
   return Backbone.View.extend({
 
-    // Share Event object for pub-sub communication across models and views
+    // Use Event Object for pub-sub communication across models and views
     ev: EventManager,
 
     render: function () {

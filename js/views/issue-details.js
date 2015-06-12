@@ -19,15 +19,88 @@ define([
     DEFAULT_MSG_ID = '#default-message',
     ISSUE_DETAILS_ID = '#issue-details';
 
-  var IssueView = BaseView.extend({
+  //url = 'https://api.github.com/repos/rails/rails/issues/' + number;
+  //
+  //function getIssueDetailsContent(issueID) {
+  //
+  //  if (localStorage.getItem("If-None-Match")) {
+  //
+  //    // Check if the data has been modified
+  //    $.ajax({
+  //      url: url,
+  //      type: 'head',
+  //      statusCode: {
+  //        // Success
+  //        200: function (xhr) {
+  //          displayIssues(xhr);
+  //        }
+  //      }
+  //    });
+  //  } else {
+  //    displayNewResource();
+  //  }
+  //};
 
-    el: $('#div'),
+
+  /*** HELPERS ***/
+
+  //function displayIssues(xhr) {
+  //  if (isModified(xhr)) {
+  //    displayNewResource();
+  //  } else {
+  //    displayCachedResource();
+  //  }
+  //};
+  //
+  //function isModified(xhr) {
+  //  return localStorage["If-None-Match"] != getETagHeader(xhr.getResponseHeader("ETag"));
+  //};
+  //
+  //function getETagHeader(ETagString) {
+  //  return JSON.parse(ETagString.substring(2));
+  //};
+  //
+  //function displayCachedResource() {
+  //  var IssuesCollection = new IssuesPageableCollection({});
+  //  IssuesCollection.fetch({
+  //    success: function (issues) {
+  //      new IssueListView({collection: issues}).render();
+  //    },
+  //    error: function () {
+  //      console.log('Error occured while fetching the issues from LocalStorage');
+  //    }
+  //  })
+  //};
+  //
+  //function displayNewResource() {
+  //  $.ajax({
+  //    'url': url,
+  //    'ifModified': true,
+  //    success: function (data, code, xhr) {
+  //      localStorage["If-None-Match"] = getETagHeader(xhr.getResponseHeader("ETag"));
+  //      var IssuesCollection = new IssuesPageableCollection(data);
+  //      IssuesCollection.each(function (model) {
+  //        model.save();
+  //      });
+  //      new IssueListView({collection: IssuesCollection}).render();
+  //    },
+  //    error: function () {
+  //      console.log('Error occured while fetching the issues from Github API server');
+  //    }
+  //  })
+  //};
+
+
+  var IssueDetailsView = BaseView.extend({
+
+    el: $(VIEWS_SECTION_SELECTOR),
 
     initialize: function () {
 
       var that = this;
 
       var IssueModelItem = new IssueDetailsModel({number: this.model.number});
+
       IssueModelItem.fetch({
         success: function (data) {
           that.model = data.attributes;
@@ -75,7 +148,7 @@ define([
       }
 
       setTimeout(function () {
-        IssueView.__super__.render.apply(this, arguments)
+        IssueDetailsView.__super__.render.apply(this, arguments)
       }, 0);
 
       return this;
@@ -83,6 +156,6 @@ define([
   });
 
   // The module now returns the view.
-  return IssueView;
+  return IssueDetailsView;
 
 });

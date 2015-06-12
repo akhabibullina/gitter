@@ -69,7 +69,7 @@ issues-pageable.js
 * Views
 ```
 base.js
-contents.js
+issue-list.js
 issue-details.js
 issue-list-item.js
 navigation-menu.js

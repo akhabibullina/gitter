@@ -5,9 +5,9 @@ define([
   'underscore',
   'backbone',
   'event-manager',
-  'views/contents',
+  'views/issue-list',
   'views/issue-details'
-], function ($, _, Backbone, EventManager, ContentsView, IssueView) {
+], function ($, _, Backbone, EventManager, IssueListView, IssueDetailsView) {
 
   var initialize = function () {
 
@@ -23,7 +23,7 @@ define([
       },
 
       contents: function () {
-        ContentsView.initialize();
+        new IssueListView();
       },
 
       viewEmptyDocument: function () {
@@ -31,12 +31,11 @@ define([
       },
 
       viewDocument: function (number) {
-        new IssueView({model: {'number': number}});
+        new IssueDetailsView({model: {'number': number}});
       },
 
       leaveFeedback: function () {
         EventManager.trigger('navigate:feedback');
-        console.log('Navigate to Feedback Page');
         // todo: add form submit for some test email address :)
       },
 

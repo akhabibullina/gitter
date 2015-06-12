@@ -8,14 +8,14 @@ define([
 ], function ($, _, Backbone, BaseView) {
 
   var navigationMenu;
-  var NAVIGATION_WRAPPER_SELECTOR = '#nav';
+  var NAVIGATION_WRAPPER_SELECTOR = '#nav a';
 
   var initialize = function () {
 
     var NavigationMenu = BaseView.extend({
 
       events: {
-        'click a': function (e) {
+        'click': function (e) {
           this.activate(e);
         }
 
@@ -35,6 +35,7 @@ define([
 
   };
 
+  // Singleton
   return {
     initialize: initialize,
     getInstance: function () {

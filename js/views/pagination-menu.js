@@ -28,6 +28,7 @@ define([
     paginationMenu = new PaginationMenu({el: $(PAGINATION_WRAPPER_SELECTOR)});
   };
 
+  // Singleton
   return {
     initialize: initialize,
     getInstance: function() { return paginationMenu }

@@ -1,5 +1,5 @@
 // Filename: views/issue-list-item.js
-
+// todo: take out the selectors to the sharing module
 define([
   'jquery',
   'underscore',
@@ -22,7 +22,7 @@ define([
 
         // Trigger the navigation menu active tab
         // todo: take out to nav menu
-        $('.icon.fa-folder').attr('href', '#view/' + this.model.number).click();
+        $('.icon.fa-folder').attr('href', '#view/' + this.model.attributes.number).click();
 
       }
     },
