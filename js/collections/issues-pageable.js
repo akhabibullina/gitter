@@ -1,6 +1,13 @@
-// Filename: collections/issues-pageable
+/**
+ * Filename: collections/issues-pageable
+ *
+ * Collection of issues.
+ *
+ * Notes:
+ * - Backbone Localstorage for storing/fetching the data without
+ * - Perform pagination using Github API
+ */
 
-// todo: escape to prevent js attack
 // todo: reset bootstrapped data
 define([
   'underscore',
@@ -16,15 +23,15 @@ define([
       },
       model: IssueModel,
       localStorage: Backbone.LocalStorage ? new Backbone.LocalStorage("issues-page") : {},
-      //url: function () {
-      //  // todo: change per_page to 25!
-      //  //return 'https://api.github.com/repos/rails/rails/issues?page=' + this.pageNumber + '&per_page=5';
-      //  // todo: uncomment
-      //  return 'https://api.github.com/repos/rails/rails/issues';
-      //},
+      url: function () {
+        //return 'https://api.github.com/repos/rails/rails/issues?page=' + this.pageNumber + '&per_page=5';
+      },
       nextPage: function () {
+        this.pageNumber = this.pageNumber + 1;
+
       },
       prevPage: function () {
+        this.pageNumber = this.pageNumber = 0? 1: this.pageNumber - 1;
       }
     }
   );

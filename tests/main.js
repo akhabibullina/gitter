@@ -10,6 +10,7 @@ require.config({
     underscore: 'lib/underscore',
     backbone: 'lib/backbone',
     template: '../templates',
+    localstorage: 'lib/backbone.localStorage',
     Squire: '../tests/lib/squire'
   }
 });
@@ -19,6 +20,8 @@ require([
   '../tests/unit/views/base-view-unit',
   '../tests/unit/views/pagination-menu-unit',
   '../tests/unit/views/navigation-menu-unit',
+  '../tests/unit/views/issue-list-unit',
+  '../tests/unit/views/issue-list-item-unit',
 
   '../tests/unit/models/issue-details-unit',
   '../tests/unit/models/issue-unit',

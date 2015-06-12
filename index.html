@@ -1,18 +1,4 @@
 <!DOCTYPE HTML>
-<!--todo:
-1. replace tabs with whitespaces
-2. check markup, maybe take the list of of the header
-3. improve styles
-3. load all theme's js files via requirejs
-4. remove panel logic from main.js -- should be in router.js
-5. change hash on menu items click using router
-
-// todo:
-// 5. check & update the comments
-// 6. cleanup Contents and View
-// 7. HTML5 History
-
--->
 <html>
 <head>
     <title>Gitter</title>
@@ -57,10 +43,10 @@
             </section>
             <div id="pagination">
                 <div class="more-btn 12u$">
-                    <input id="prev" type="submit" value="Previous"/>
+                    <input id="prev" data-page="1" type="submit" value="Previous"/>
                 </div>
                 <div class="more-btn 12u$">
-                    <input id="more" type="submit" value="Next"/>
+                    <input id="more" data-page="1" type="submit" value="Next"/>
                 </div>
             </div>
         </article>

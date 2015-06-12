@@ -1,4 +1,8 @@
-// Filename: app.js
+/**
+ * Filename: app.js
+ *
+ * Initializes the modules and run the app.
+ */
 
 define([
   'jquery',

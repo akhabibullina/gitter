@@ -1,3 +1,9 @@
+/**
+ * Filename: views/pagination-menu-unit
+ *
+ * Unit for test navigation view.
+ */
+
 require([
   'jquery',
   'underscore',

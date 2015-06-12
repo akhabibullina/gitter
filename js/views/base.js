@@ -1,4 +1,9 @@
-// Filename: views/base
+/**
+ * Filename: views/base
+ *
+ * Base View module for views where we keep the common
+ * functionality all views should share.
+ */
 
 define([
   'jquery',

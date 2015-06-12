@@ -1,28 +1,43 @@
-// Filename: views/contents
+/**
+ * Filename: views/contents
+ *
+ * Issue List View handles the list of issues on the page.
+ *
+ * Notes:
+ *  - Uses Github API pagination
+ *  - Backbone Localstorage for storing/fetching the data without
+ *    performing the requests to the API or server. *
+ */
 
 define([
   'jquery',
   'underscore',
   'backbone',
+  'log',
   'views/base',
   'views/navigation-menu',
   'views/issue-list-item',
   'collections/issues-pageable',
   'localstorage'
-], function ($, _, Backbone, BaseView, NavigationMenu, IssueListView, IssuesPageableCollection) {
+], function ($, _, Backbone, Logger, BaseView, NavMenu, IssueListItemView, IssuesPageableCollection) {
 
   var
     CONTENTS_ID = '#contents',
     ARTICLE_SELECTOR = 'article',
-    CONTENTS_SECTION_SELECTOR = '#contents section',
-    HOME_ICON = '.icon.fa-home';
+    CONTENTS_SECTION_SELECTOR = '#contents section';
 
-  var initialize = function () {
+  var
+    view,
+    url,
+    pageNumber = 1;
 
-    var pageNumber = 1;
-    var url = 'https://api.github.com/repos/rails/rails/issues';
+  // todo: this localStorage solution doesn't pay off, switch back to the server!
 
-    function getPageableIssuesContent(pageNumber) {
+    function getPageableIssuesContent() {
+
+      url = 'https://api.github.com/repos/rails/rails/issues?page=' + pageNumber + '&per_page=5';
+
+      var view = this;
 
       if (localStorage.getItem("If-None-Match")) {
 
@@ -53,21 +68,27 @@ define([
     };
 
     function isModified(xhr) {
-      return localStorage["If-None-Match"] != getETagHeader(xhr.getResponseHeader("ETag"));
+      if (xhr) {
+        return localStorage['If-None-Match'] != getETagHeader(xhr);
+      }
     };
 
-    function getETagHeader(ETagString) {
-      return JSON.parse(ETagString.substring(2));
+    function getETagHeader(xhr) {
+      var etag = xhr.getResponseHeader('ETag');
+      if (etag) {
+        return JSON.parse(etag.substring(2));
+      }
     };
 
     function displayCachedResource() {
       var IssuesCollection = new IssuesPageableCollection({});
       IssuesCollection.fetch({
         success: function (issues) {
-          new IssueListView({collection: issues}).render();
+          view.collection = issues;
+          view.render();
         },
         error: function () {
-          console.log('Error occured while fetching the issues from LocalStorage');
+          Logger.out('Error occured while fetching the issues from LocalStorage');
         }
       })
     };
@@ -77,47 +98,52 @@ define([
         'url': url,
         'ifModified': true,
         success: function (data, code, xhr) {
-          localStorage["If-None-Match"] = getETagHeader(xhr.getResponseHeader("ETag"));
+
+          var etag = getETagHeader(xhr);
+          etag &&(localStorage['If-None-Match'] = etag);
+
           var IssuesCollection = new IssuesPageableCollection(data);
+
+          view.collection = IssuesCollection;
+          view.render();
+
           IssuesCollection.each(function (model) {
             model.save();
           });
-          new IssueListView({collection: IssuesCollection}).render();
         },
         error: function () {
-          console.log('Error occured while fetching the issues from Github API server');
+          Logger.out('Error occured while fetching the issues from Github API server');
         }
       })
     };
-
-    getPageableIssuesContent(pageNumber);
-
-  };
 
   var IssueListView = BaseView.extend({
 
     el: $(CONTENTS_SECTION_SELECTOR),
 
     initialize: function () {
+      // quick'n'dirty solution
+      // todo: replace locally global variable with a better way
+      view = this;
 
-      initialize();
-
-      var that = this;
+      getPageableIssuesContent();
 
       this.ev.on('pagination:next', function () {
         getPageableIssuesContent(++pageNumber);
-        console.log('Fetching next page');
+        //view.collection && view.collection.getNextPage();
+        Logger.out('Fetching next page');
       });
 
-      // todo:
       this.ev.on('pagination:prev', function () {
-        getPageableIssuesContent(--pageNumber);
-        console.log('Fetching prev page');
+        pageNumber === 1? 1: pageNumber - 1;
+        getPageableIssuesContent(pageNumber);
+        //view.collection && view.collection.prevPage();
+        Logger.out('Fetching prev page');
       });
 
       this.ev.on('document:selected, navigate:feedback', function () {
         // To avoid memory leaks destroy the old view
-        that.remove();
+        view.remove();
       });
 
     },
@@ -129,18 +155,22 @@ define([
       $(CONTENTS_ID).show();
 
       // Inform the menu animation about the view change
-      var menuItem = $(HOME_ICON);
+      var menuItem = $(NavMenu.MENU_ICONS.LIST);
       menuItem[0] && menuItem[0].dispatchEvent(new Event('click'));
 
       // Update the view
       var list = $('<ul></ul>');
-      $(CONTENTS_SECTION_SELECTOR).html(list);
-      (this.collection.models).forEach(function (document) {
-        list.append(new IssueListView({model: document}).render().el);
-      }, this);
+      this.$el.html(list);
+
+      // Update the view  and populate it with the data..
+      if (view.collection && view.collection.models){
+        (view.collection.models).forEach(function (document) {
+          list.append(new IssueListItemView({model: document}).render().el);
+        }, this);
+      }
 
       // Call the parent
-      IssueListView.__super__.render.apply(this, arguments);
+      IssueListItemView.__super__.render.apply(this, arguments);
 
       return this;
     }

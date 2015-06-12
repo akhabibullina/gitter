@@ -1,4 +1,11 @@
-// Filename: views/navigation-menu
+/**
+ * Filename: views/navigation-menu
+ *
+ * Navigation menu between pages:
+ * - all issues
+ * - issue details
+ * - feedback
+ */
 
 define([
   'jquery',
@@ -7,8 +14,13 @@ define([
   'views/base'
 ], function ($, _, Backbone, BaseView) {
 
-  var navigationMenu;
-  var NAVIGATION_WRAPPER_SELECTOR = '#nav a';
+  var navigationMenu,
+      NAVIGATION_WRAPPER_SELECTOR = '#nav a',
+      MENU_ICONS = {
+        'LIST': '.icon.fa-home',
+        'DETAILS': '.icon.fa-folder',
+        'FEEDBACK': '.icon.fa-envelope'
+      };
 
   var initialize = function () {
 
@@ -40,7 +52,8 @@ define([
     initialize: initialize,
     getInstance: function () {
       return navigationMenu
-    }
+    },
+    MENU_ICONS: MENU_ICONS
   };
 
 });

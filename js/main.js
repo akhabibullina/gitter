@@ -1,4 +1,8 @@
-// Filename: main.js
+/**
+ * Filename: main.js
+ *
+ * Starting point.
+ */
 
 // Require.js allows us to configure shortcut alias.
 // There usage will become more apparent further along in the tutorial.
@@ -10,7 +14,8 @@ require.config({
     backbone: 'lib/backbone',
     localstorage: 'lib/backbone.localStorage',
     template: '../templates',
-    tests: 'tests'
+    tests: 'tests',
+    log: 'log'
   },
   shim: {
 //    'theme/skel': {

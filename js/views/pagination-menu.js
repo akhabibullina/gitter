@@ -1,4 +1,8 @@
-// Filename: views/pagination-menu
+/**
+ * Filename: views/pagination-menu
+ *
+ * Add the buttons that have the ability to navigate between issues pages, at a given increment.
+ */
 
 define([
   'jquery',

@@ -1,3 +1,9 @@
+/**
+ * Filename: models/issue-unit
+ *
+ * Unit test for pageable issues model.
+ */
+
 require([
   'jquery',
   'underscore',
@@ -16,7 +22,7 @@ require([
         labels: [],
         state: 'Open',
         user: {'login': 'anonymous', 'html_url': '', 'avatar_url': ''},
-        summary: 'To Be Continued',
+        body: 'To Be Continued',
         teaser: 'Something 140char',
         comments: 0
       };
@@ -35,6 +41,7 @@ require([
     deepEqual(issueModel.attributes, data);
   });
 
+  // Skip to prevent the additional requests to Github API which can exceed the rate limit.
   QUnit.skip("[save] saves the correct set of values... ", function () {
     var expected = {
       number: 1,
@@ -42,7 +49,7 @@ require([
       labels: [],
       state: 'Open',
       user: {'login': 'not-so-anonymous', 'html_url': '', 'avatar_url': ''},
-      summary: 'To Be Continued',
+      body: 'To Be Continued',
       teaser: 'Something 140char',
       comments: 0
     };

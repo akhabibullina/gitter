@@ -1,3 +1,11 @@
+/**
+ * Filename: collections/issue-pageable
+ *
+ * Unit test for pageable issues list collection.
+ *
+ * Note: uses mocks via Squire.
+ */
+
 define(['Squire'], function (Squire) {
 
   var injector = new Squire();
@@ -15,7 +23,6 @@ define(['Squire'], function (Squire) {
 
     QUnit.module("Issues Collection", {
       setup: function () {
-
         // Init
         issuesPageable = new IssuePageableCollection({});
 
@@ -30,6 +37,7 @@ define(['Squire'], function (Squire) {
       deepEqual(issuesPageable.attributes, data);
     });
 
+    // Skip to prevent the additional requests to Github API which can exceed the rate limit.
     QUnit.skip("[fetch] pulls the correct set of values... ", function (assert) {
       var done = assert.async();
       issuesPageable.fetch({

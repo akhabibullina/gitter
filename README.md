@@ -1,39 +1,45 @@
 # Gitter
 
-Gitter is a simple new issues viewer for Github build on BackboneJs.
+Gitter is a simple "all-client-side-based" new issues viewer for Github build on BackboneJs.
 
 ### Version
-0.0.1
+0.0.2
 
 ### How to run Gitter
 1. Unzip the folder
-2. Start the webserver such as Apache to serve the app
-3. Open the file ``` path/to/project/gitter/index.html``` in the browser
+2. Start the webserver such as Apache to serve the app locally
+3. Run the file ``` path/to/project/gitter/index.html``` in the browser
 4. You are there, enjoy!
 
 ### How to run Unit Tests
 Open file ```tests/index.html``` in the browser. You will see similar output:
 ![alt text](http://addyosmani.com/gyazo/7d4de12.png "Logo Title Text 1")
 
+### Warning!
+Github API has rate limit so if the applications does too many requests the limit can exceed.
+Good news: Using oAUth version of Github will help to request more.
+
 ### Tech
 
 Gitter uses a number of open source projects to work properly:
 
-* [BackboneJs] - Backbone.js gives structure to web applications
-* [jQuery] - Backbone's dependency and helper for DOM manipulation tasks
-* [Underscore] - great UI boilerplate for modern web apps
-* [RequireJs] - a JavaScript file and module loader
-* [Text!] - Require.js plugin that allows to load raw text as a dependency file
-* [Issues API]
-* [qUnit] - A JavaScript Unit Testing framework
-* [YUI Compressor] - code minifier
-* [node.js] - evented I/O for the backend
+* [BackboneJs] - Backbone.js gives structure to web applications.
+* [Backbone.LocalStorage] - Backbone plugin that uses browser's LocalStorage for persistence or add NodeJs server for simplicity.
+* [jQuery] - Backbone's dependency and helper for DOM manipulation tasks.
+* [Underscore] - Great UI boilerplate for modern web apps.
+* [RequireJs] - JavaScript file and module loader.
+* [Text!] - Require.js plugin that allows to load raw text as a dependency file.
+* [Issues API] - Github API for developers.
+* [qUnit] - JavaScript Unit Testing framework(TDD)
+* [Squire] - Dependency injector for testing Require.js modules.
+* [GruntJs] - One word: automation.
 
 ### Structure and organization of the code
 
 Gitter currently has the following structure
 
 * Routes handling the following paths:
+
 ```
 #contents          // Show the list of issues on Default Page
 #view              // Show empty Issues Details Page
@@ -81,21 +87,21 @@ issue-teaser.html
 ```
 
 ### Known Issues
-- HTML 5 Hash History
+1. Github API has rate limit so if the applications does too many requests the limit can exceed.
+2. UI bugs
 
 ### Todo's
 
+- UI issues
 - Add more unit tests
-- Automate JSHint(GruntJs)
-- Concatenate and minify the files into one "build" file(GruntJs)
-- Logging mechanism
-- Handle exceptions
-- Use [Backbone.LocalStorage] - Backbone plugin that uses browser's LocalStorage for persistence or add NodeJs server for simplicity
+- Use auth version of Github API
+- Maybe: add node.js server to persist the state
+- Run tests under "test" task(GruntJs)
+- Backbone.Validations for models
 
 License
 ----
 MIT
-
 
 **Free Software, Hell Yeah!**
 
@@ -109,4 +115,6 @@ MIT
 [qUnit]: http://qunitjs.com/
 [node.js]:http://nodejs.org
 [jQuery]:http://jquery.com
+[GruntJs]:http://gruntjs.com/
+[Squire]:https://github.com/iammerrick/Squire.js/
 

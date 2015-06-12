@@ -1,5 +1,9 @@
-// Filename: models/project
-// todo: validate the model
+/**
+ * Filename: models/issue
+ *
+ * Represents a single item of the issues collection.
+ */
+
 define([
   'underscore',
   'backbone'
@@ -12,7 +16,7 @@ define([
       labels: [],
       state: 'N/A',
       user: {'login': 'anonymous', 'html_url': '', 'avatar_url': ''},
-      summary: 'To Be Continued',
+      body: 'To Be Continued',
       teaser: 'Something 140char',
       comments: 0
     }

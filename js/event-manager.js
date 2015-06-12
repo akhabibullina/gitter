@@ -1,7 +1,16 @@
-// Filename: event-manager.js
-define(['jquery', 'underscore', 'backbone'], function ($, _, Backbone) {
+/**
+ * Filename: event-manager.js
+ *
+ * Creates a Common Event Object which will be used for
+ * sub-pub model to communicate between modules.
+ */
 
-  // Create a Common Event Object
+define([
+  'jquery',
+  'underscore',
+  'backbone'
+  ], function ($, _, Backbone) {
+
   return _.extend({}, Backbone.Events);
 
 });

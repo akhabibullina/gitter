@@ -1,3 +1,9 @@
+/**
+ * Filename: collections/issue-details-unit
+ *
+ * Unit test for issue details model.
+ */
+
 require([
   'jquery',
   'underscore',
@@ -16,7 +22,7 @@ require([
         labels: [],
         state: 'N/A',
         user: {'login': 'anonymous', 'html_url': '', 'avatar_url': ''},
-        summary: 'To Be Continued',
+        body: 'To Be Continued',
         teaser: 'Something 140char',
         comments: 0
       }
@@ -37,6 +43,7 @@ require([
     deepEqual(issueDetailsModel.attributes, data);
   });
 
+  // Skip to prevent the additional requests to Github API which can exceed the rate limit.
   QUnit.skip("[fetch] pulls the correct set of values... ", function (assert) {
     var done = assert.async();
     issueDetailsModel.fetch({

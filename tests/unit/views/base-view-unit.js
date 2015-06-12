@@ -1,4 +1,9 @@
-var issue;
+/**
+ * Filename: views/base
+ *
+ * Unit test Base View class that all the views share.
+ */
+
 require([
   'jquery',
   'underscore',

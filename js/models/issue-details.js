@@ -1,5 +1,11 @@
-// Filename: models/project
-// todo: validate the model
+/**
+ * Filename: models/project
+ *
+ * Represents a single item of the issues collection.
+ * Extends issue model with 'url' property to be able
+ * to fetch the issue data on demand.
+ */
+
 define([
   'underscore',
   'backbone',

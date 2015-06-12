@@ -1,16 +1,27 @@
-// Filename: views/issue-details
+/**
+ * Filename: views/issue-details
+ *
+ * Issue Details view is responsible for a specific issue the user wants to see details for.
+ *
+ * Notes:
+ *  - It uses text Backbone plugin that helps to load HTML templates.
+ *  - Backbone Localstorage for storing/fetching the data without
+ *    performing the requests to the API or server. *
+ *
+ */
 
 define([
   'jquery',
   'underscore',
   'backbone',
+  'log',
   'views/base',
-  // Using the Require.js text! plugin, we are loaded raw text which will be used as our views primary template
-  // https://github.com/requirejs/text
+  // Using the Require.js text! plugin, we are loaded raw text
+  // which will be used as our views primary template: https://github.com/requirejs/text
   'text!../template/issue-details.html',
   'text!../template/comment.html',
   'models/issue-details'
-], function ($, _, Backbone, BaseView, IssueDetailsTemplate, CommentTemplate, IssueDetailsModel) {
+], function ($, _, Backbone, Logger, BaseView, IssueDetailsTemplate, CommentTemplate, IssueDetailsModel) {
 
   var
     ARTICLE_SELECTOR = 'article',
@@ -19,83 +30,15 @@ define([
     DEFAULT_MSG_ID = '#default-message',
     ISSUE_DETAILS_ID = '#issue-details';
 
-  //url = 'https://api.github.com/repos/rails/rails/issues/' + number;
-  //
-  //function getIssueDetailsContent(issueID) {
-  //
-  //  if (localStorage.getItem("If-None-Match")) {
-  //
-  //    // Check if the data has been modified
-  //    $.ajax({
-  //      url: url,
-  //      type: 'head',
-  //      statusCode: {
-  //        // Success
-  //        200: function (xhr) {
-  //          displayIssues(xhr);
-  //        }
-  //      }
-  //    });
-  //  } else {
-  //    displayNewResource();
-  //  }
-  //};
-
-
-  /*** HELPERS ***/
-
-  //function displayIssues(xhr) {
-  //  if (isModified(xhr)) {
-  //    displayNewResource();
-  //  } else {
-  //    displayCachedResource();
-  //  }
-  //};
-  //
-  //function isModified(xhr) {
-  //  return localStorage["If-None-Match"] != getETagHeader(xhr.getResponseHeader("ETag"));
-  //};
-  //
-  //function getETagHeader(ETagString) {
-  //  return JSON.parse(ETagString.substring(2));
-  //};
-  //
-  //function displayCachedResource() {
-  //  var IssuesCollection = new IssuesPageableCollection({});
-  //  IssuesCollection.fetch({
-  //    success: function (issues) {
-  //      new IssueListView({collection: issues}).render();
-  //    },
-  //    error: function () {
-  //      console.log('Error occured while fetching the issues from LocalStorage');
-  //    }
-  //  })
-  //};
-  //
-  //function displayNewResource() {
-  //  $.ajax({
-  //    'url': url,
-  //    'ifModified': true,
-  //    success: function (data, code, xhr) {
-  //      localStorage["If-None-Match"] = getETagHeader(xhr.getResponseHeader("ETag"));
-  //      var IssuesCollection = new IssuesPageableCollection(data);
-  //      IssuesCollection.each(function (model) {
-  //        model.save();
-  //      });
-  //      new IssueListView({collection: IssuesCollection}).render();
-  //    },
-  //    error: function () {
-  //      console.log('Error occured while fetching the issues from Github API server');
-  //    }
-  //  })
-  //};
-
-
   var IssueDetailsView = BaseView.extend({
 
     el: $(VIEWS_SECTION_SELECTOR),
 
     initialize: function () {
+
+      if (!this.model) {
+        return;
+      }
 
       var that = this;
 
@@ -110,14 +53,14 @@ define([
             $.get(that.model.comments_url, function (data) {
               that.model.comments_list = data;
               that.render();
-            })
+            });
           } else {
             that.render();
           }
         },
         error: function (e) {
-          console.log('Unable to get the info for selected item.' + e);
-          // todo: show 'wrong id' message
+          Logger.out('Unable to get the info for selected item.' + e);
+          $(ISSUE_DETAILS_ID).append($('<div class="row"><div id="default-message" class="6u 12u$(mobile)">Oops, we were not able to find the issue for ID provided...</div></div>'));
         }
       });
 
@@ -125,6 +68,7 @@ define([
         // To avoid memory leaks destroy the old view
         that.remove();
       });
+
     },
 
     render: function () {
@@ -133,6 +77,11 @@ define([
       $(ARTICLE_SELECTOR).hide();
       $(VIEW_ID).show();
       $(DEFAULT_MSG_ID).hide();
+
+      if (!this.model) {
+        // Show default message message
+        $(ISSUE_DETAILS_ID).append($('<div class="row"><div id="default-message" class="6u 12u$(mobile)">Please selected the issue you want to see first.</div></div>'));
+      }
 
       // Inform the menu animation about the view change
       // Using Underscore we can compile our template with data.
