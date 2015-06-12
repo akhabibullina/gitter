@@ -87,17 +87,18 @@ issue-teaser.html
 ```
 
 ### Known Issues
-1. Github API has rate limit so if the applications does too many requests the limit can exceed.
-2. UI bugs
+Github API has rate limit so if the applications does too many requests the limit can exceed.
 
 ### Todo's
 
-- UI issues
-- Add more unit tests
-- Use auth version of Github API
-- Maybe: add node.js server to persist the state
-- Run tests under "test" task(GruntJs)
+- Add "by number page" pagination(now it's only More and Prev buttons)
+- UI fixes after refactoring
+- Provide more unit tests
+- Make sure there are no memory leaks with views
+- Add node.js server to persist the state(for 2-way binding and les requests to Github API)
+- Run tests under "test" task(GruntJs) without browser
 - Backbone.Validations for models
+- Other minor issues: see todo in the code
 
 License
 ----

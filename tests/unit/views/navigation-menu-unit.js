@@ -39,7 +39,7 @@ require([
   test("[init] extends Backbone View Object with correct 'el' property value... ", function () {
     ok(navigationMenuView instanceof Backbone.View, 'Inherits Backbone View Object');
     ok(navigationMenuView.el);
-    deepEqual(navigationMenuView.el, navigationContainer[0]);
+    deepEqual(navigationMenuView.el, navigationLink[0]);
   });
 
 

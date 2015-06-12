@@ -66,7 +66,8 @@ define([
 
       this.ev.on('document:selected, navigate:feedback', function () {
         // To avoid memory leaks destroy the old view
-        that.remove();
+        // that.remove();
+        $(ISSUE_DETAILS_ID).hide();
       });
 
     },
@@ -76,7 +77,6 @@ define([
       // Show the current view
       $(ARTICLE_SELECTOR).hide();
       $(VIEW_ID).show();
-      $(DEFAULT_MSG_ID).hide();
 
       if (!this.model) {
         // Show default message message

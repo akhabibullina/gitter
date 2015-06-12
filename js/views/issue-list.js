@@ -31,6 +31,9 @@ define([
     url,
     pageNumber = 1;
 
+  // This solution uses localstorage instead of the app server because
+  // we want to keep the project is client-side based
+  
   // todo: this localStorage solution doesn't pay off, switch back to the server!
 
     function getPageableIssuesContent() {
@@ -38,6 +41,10 @@ define([
       url = 'https://api.github.com/repos/rails/rails/issues?page=' + pageNumber + '&per_page=5';
 
       var view = this;
+
+      if(localStorage.length > 100) {
+        localstorage.clear();
+      }
 
       if (localStorage.getItem("If-None-Match")) {
 
@@ -74,7 +81,7 @@ define([
     };
 
     function getETagHeader(xhr) {
-      var etag = xhr.getResponseHeader('ETag');
+      var etag = xhr.getResponseHeader && xhr.getResponseHeader('ETag');
       if (etag) {
         return JSON.parse(etag.substring(2));
       }
@@ -142,8 +149,9 @@ define([
       });
 
       this.ev.on('document:selected, navigate:feedback', function () {
-        // To avoid memory leaks destroy the old view
-        view.remove();
+        // todo: to avoid memory leaks destroy the old view
+        //view.remove();
+        $(CONTENTS_ID).hide();
       });
 
     },
