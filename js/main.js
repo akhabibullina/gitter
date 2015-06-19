@@ -12,7 +12,7 @@ require.config({
     jquery: '//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min',
     underscore: 'lib/underscore',
     backbone: 'lib/backbone',
-    localstorage: 'lib/backbone.localStorage',
+    localstorage: 'lib/backbone.localstorage',
     template: '../templates',
     tests: 'tests',
     log: 'log'
